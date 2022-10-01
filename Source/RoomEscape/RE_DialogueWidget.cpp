@@ -20,9 +20,6 @@ void URE_DialogueWidget::RemoveWidget()
 	RE_PlayerController->OnHUDOffCurrentWidget();
 }
 
-
-
-
 void URE_DialogueWidget::InitializeProperties(FString FileName)
 {
 	if (*FileName == FString(""))
@@ -50,15 +47,46 @@ void URE_DialogueWidget::InitializeProperties(FString FileName)
 
 
 
+/* 일반 대사*/
+void URE_DialogueWidget::FindCurrentRowNum()
+{
+	CurrentRowNum += (*DialogueRow).Sum;
+}
+
+void URE_DialogueWidget::InspectNextDialogue()
+{
+	DialogueRow = TestDataTable->FindRow<FRE_Dialogue>(FName(*(FString::FormatAsNumber(CurrentRowNum))), FString(""));
+
+	if (!DialogueRow)
+	{
+		RemoveWidget();
+		HasNextDialogue = false;
+		return;
+	}
+	
+}
+
+void URE_DialogueWidget::SetCurrentlyRow()
+{
+
+	Character_Image->SetBrushFromTexture(CharacterImageArray[(*DialogueRow).CharacterImage]);
+	CharacterName_Text->SetText((*DialogueRow).CharacterName);
+	Dialogue_Text->SetText((*DialogueRow).Dialogue);
+
+	InspectDialogueSelectBool();
+
+}
 
 
 
+
+
+/* 선택지 */
 void URE_DialogueWidget::InspectDialogueSelectBool()
 {
 	if ((*DialogueRow).SelectBool != 1)
 		return;
 
-	UE_LOG(LogTemp, Warning, TEXT("if ((*DialogueRow).SelectBool)"));
 	VisibleDialogueSelection = true;
 	BP_Dialogue_Selection->SetVisibility(ESlateVisibility::Visible);
 
@@ -72,7 +100,6 @@ void URE_DialogueWidget::SetSelectionDialogueCurrentlyRow()
 	BP_Dialogue_Selection->SelectionText2->SetText((*DialogueRow).SelectDialogue2);
 
 }
-
 
 void URE_DialogueWidget::SelectionButton1_OnClicked()
 {
@@ -92,41 +119,10 @@ void URE_DialogueWidget::SelectionButton2_OnClicked()
 
 }
 
-void URE_DialogueWidget::FindCurrentRowNum()
-{
-	CurrentRowNum += ((*DialogueRow).Sum + (*DialogueRow).ResultSum1 + (*DialogueRow).ResultSum2);
-	//CurrentRowNum++;
-}
 
 
 
 
-void URE_DialogueWidget::InspectNextDialogue()
-{
-	DialogueRow = TestDataTable->FindRow<FRE_Dialogue>(FName(*(FString::FormatAsNumber(CurrentRowNum))), FString(""));
-
-	if (!DialogueRow)
-	{
-		RemoveWidget();
-		HasNextDialogue = false;
-		return;
-	}
-	
-}
-
-
-
-
-void URE_DialogueWidget::SetCurrentlyRow()
-{
-
-	Character_Image->SetBrushFromTexture(CharacterImageArray[(*DialogueRow).CharacterImage]);
-	CharacterName_Text->SetText((*DialogueRow).CharacterName);
-	Dialogue_Text->SetText((*DialogueRow).Dialogue);
-
-	InspectDialogueSelectBool();
-
-}
 
 
 FReply URE_DialogueWidget::NativeOnKeyDown(const FGeometry & InGeometry, const FKeyEvent & InKeyEvent)
