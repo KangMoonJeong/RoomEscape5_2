@@ -32,7 +32,7 @@ protected:
 private:
 	class ARE_Chapter* RE_Chapter;
 	class UDataTable* TestDataTable;
-	int32 CurrentRowNum = 0;
+	int32 CurrentRowNum = 1;
 
 public:
 	void InitializeProperties(FString FileName);
@@ -67,4 +67,10 @@ protected:
 
 	UFUNCTION()
 	void SelectionButton2_OnClicked();
+
+
+	void FindCurrentRowNum();
+
+
+
 };

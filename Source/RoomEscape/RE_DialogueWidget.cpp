@@ -41,6 +41,7 @@ void URE_DialogueWidget::InitializeProperties(FString FileName)
 	HasNextDialogue = true;
 	bIsFocusable = true;
 	SetKeyboardFocus();
+
 	InspectNextDialogue();
 	SetCurrentlyRow();
 }
@@ -78,7 +79,8 @@ void URE_DialogueWidget::SelectionButton1_OnClicked()
 	BP_Dialogue_Selection->SetVisibility(ESlateVisibility::Collapsed);
 	VisibleDialogueSelection = false;
 
-	InspectNextDialogue();
+	CurrentRowNum += (*DialogueRow).ResultSum1;
+
 }
 
 void URE_DialogueWidget::SelectionButton2_OnClicked()
@@ -86,14 +88,21 @@ void URE_DialogueWidget::SelectionButton2_OnClicked()
 	BP_Dialogue_Selection->SetVisibility(ESlateVisibility::Collapsed);
 	VisibleDialogueSelection = false;
 
-	InspectNextDialogue();
+	CurrentRowNum += (*DialogueRow).ResultSum2;
 
 }
+
+void URE_DialogueWidget::FindCurrentRowNum()
+{
+	CurrentRowNum += ((*DialogueRow).Sum + (*DialogueRow).ResultSum1 + (*DialogueRow).ResultSum2);
+	//CurrentRowNum++;
+}
+
+
 
 
 void URE_DialogueWidget::InspectNextDialogue()
 {
-	CurrentRowNum++;
 	DialogueRow = TestDataTable->FindRow<FRE_Dialogue>(FName(*(FString::FormatAsNumber(CurrentRowNum))), FString(""));
 
 	if (!DialogueRow)
@@ -115,6 +124,8 @@ void URE_DialogueWidget::SetCurrentlyRow()
 	CharacterName_Text->SetText((*DialogueRow).CharacterName);
 	Dialogue_Text->SetText((*DialogueRow).Dialogue);
 
+	InspectDialogueSelectBool();
+
 }
 
 
@@ -122,14 +133,14 @@ FReply URE_DialogueWidget::NativeOnKeyDown(const FGeometry & InGeometry, const F
 {
 	Super::NativeOnKeyDown(InGeometry, InKeyEvent);
 	
-	InspectDialogueSelectBool();
 	
 	if(VisibleDialogueSelection)
 		return FReply::Handled();
 
-
+	FindCurrentRowNum();
 	InspectNextDialogue();
 
+	// 위 아래가 원래 하나의 함수였는데 분리시켜놔서 이거 꼭 써줘야함
 	if(!HasNextDialogue)
 		return FReply::Handled();
 

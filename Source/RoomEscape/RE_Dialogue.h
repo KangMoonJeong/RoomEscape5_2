@@ -29,5 +29,12 @@ public:
 	FText SelectDialogue2;
 
 	UPROPERTY()
-	FText ResultDialogue;
+	int32 Sum;
+
+	UPROPERTY()
+	int32 ResultSum1;
+
+	UPROPERTY()
+	int32 ResultSum2;
+
 };
