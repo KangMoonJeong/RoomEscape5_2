@@ -75,14 +75,18 @@ void URE_DialogueWidget::SetSelectionDialogueCurrentlyRow()
 
 void URE_DialogueWidget::SelectionButton1_OnClicked()
 {
-	UE_LOG(LogTemp, Warning, TEXT("URE_DialogueWidget::SelectionButton1_OnClicked()"));
 	BP_Dialogue_Selection->SetVisibility(ESlateVisibility::Collapsed);
+	VisibleDialogueSelection = false;
+
+	InspectNextDialogue();
 }
 
 void URE_DialogueWidget::SelectionButton2_OnClicked()
 {
-	UE_LOG(LogTemp, Warning, TEXT("URE_DialogueWidget::SelectionButton1_OnClicked()"));
 	BP_Dialogue_Selection->SetVisibility(ESlateVisibility::Collapsed);
+	VisibleDialogueSelection = false;
+
+	InspectNextDialogue();
 
 }
 

@@ -29,9 +29,9 @@ public:
 	virtual bool Initialize();
 
 
-	UFUNCTION()
+	/*UFUNCTION()
 	void SelectionButton1_OnClicked();
 
 	UFUNCTION()
-	void SelectionButton2_OnClicked();
+	void SelectionButton2_OnClicked();*/
 };

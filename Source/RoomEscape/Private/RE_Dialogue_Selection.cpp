@@ -8,8 +8,8 @@ bool URE_Dialogue_Selection::Initialize()
 	if (!Success)
 		return false;
 
-	SelectionButton1->OnClicked.AddDynamic(this, &URE_Dialogue_Selection::SelectionButton1_OnClicked);
-	SelectionButton2->OnClicked.AddDynamic(this, &URE_Dialogue_Selection::SelectionButton2_OnClicked);
+	//SelectionButton1->OnClicked.AddDynamic(this, &URE_Dialogue_Selection::SelectionButton1_OnClicked);
+	//SelectionButton2->OnClicked.AddDynamic(this, &URE_Dialogue_Selection::SelectionButton2_OnClicked);
 
 	return true;
 }
