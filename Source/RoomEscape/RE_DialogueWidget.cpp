@@ -5,6 +5,7 @@
 #include "RE_Dialogue.h"
 #include "RE_PlayerController.h"
 #include "RE_Dialogue_Selection.h"
+#include "Components\Button.h"
 
 
 
@@ -31,6 +32,12 @@ void URE_DialogueWidget::InitializeProperties(FString FileName)
 	if (!TestDataTable)
 		return;
 
+	BP_Dialogue_Selection->SelectionButton1->OnClicked.AddDynamic(this, &URE_DialogueWidget::SelectionButton1_OnClicked);
+	BP_Dialogue_Selection->SelectionButton2->OnClicked.AddDynamic(this, &URE_DialogueWidget::SelectionButton2_OnClicked);
+
+
+
+
 	HasNextDialogue = true;
 	bIsFocusable = true;
 	SetKeyboardFocus();
@@ -54,8 +61,31 @@ void URE_DialogueWidget::InspectDialogueSelectBool()
 	VisibleDialogueSelection = true;
 	BP_Dialogue_Selection->SetVisibility(ESlateVisibility::Visible);
 
+	SetSelectionDialogueCurrentlyRow();
 
 }
+
+void URE_DialogueWidget::SetSelectionDialogueCurrentlyRow()
+{
+	BP_Dialogue_Selection->SelectionText1->SetText((*DialogueRow).SelectDialogue1);
+	BP_Dialogue_Selection->SelectionText2->SetText((*DialogueRow).SelectDialogue2);
+
+}
+
+
+void URE_DialogueWidget::SelectionButton1_OnClicked()
+{
+	UE_LOG(LogTemp, Warning, TEXT("URE_DialogueWidget::SelectionButton1_OnClicked()"));
+	BP_Dialogue_Selection->SetVisibility(ESlateVisibility::Collapsed);
+}
+
+void URE_DialogueWidget::SelectionButton2_OnClicked()
+{
+	UE_LOG(LogTemp, Warning, TEXT("URE_DialogueWidget::SelectionButton1_OnClicked()"));
+	BP_Dialogue_Selection->SetVisibility(ESlateVisibility::Collapsed);
+
+}
+
 
 void URE_DialogueWidget::InspectNextDialogue()
 {
@@ -70,6 +100,7 @@ void URE_DialogueWidget::InspectNextDialogue()
 	}
 	
 }
+
 
 
 

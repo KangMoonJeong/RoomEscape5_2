@@ -9,7 +9,7 @@ class ROOMESCAPE_API URE_Dialogue_Selection : public UUserWidget
 {
 	GENERATED_BODY()
 	
-protected:
+public:
 
 	UPROPERTY(meta = (BindWidget))
 	class UButton* SelectionButton1;
@@ -26,4 +26,12 @@ protected:
 	class UTextBlock* SelectionText2;
 
 
+	virtual bool Initialize();
+
+
+	UFUNCTION()
+	void SelectionButton1_OnClicked();
+
+	UFUNCTION()
+	void SelectionButton2_OnClicked();
 };

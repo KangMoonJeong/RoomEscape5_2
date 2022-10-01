@@ -55,4 +55,16 @@ protected:
 	struct FRE_Dialogue* DialogueRow;
 
 	bool HasNextDialogue = true;
+
+
+	void SetSelectionDialogueCurrentlyRow();
+
+
+
+
+	UFUNCTION()
+	void SelectionButton1_OnClicked();
+
+	UFUNCTION()
+	void SelectionButton2_OnClicked();
 };
