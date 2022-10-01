@@ -17,4 +17,17 @@ public:
 
 	UPROPERTY()
 	FText Dialogue;
+
+
+	UPROPERTY()
+	int32 SelectBool;
+
+	UPROPERTY()
+	FText SelectDialogue1;
+
+	UPROPERTY()
+	FText SelectDialogue2;
+
+	UPROPERTY()
+	FText ResultDialogue;
 };

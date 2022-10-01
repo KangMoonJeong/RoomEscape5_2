@@ -18,4 +18,12 @@ protected:
 	class UButton* SelectionButton2;
 
 
+	UPROPERTY(meta = (BindWidget))
+	class UTextBlock* SelectionText1;
+
+
+	UPROPERTY(meta = (BindWidget))
+	class UTextBlock* SelectionText2;
+
+
 };

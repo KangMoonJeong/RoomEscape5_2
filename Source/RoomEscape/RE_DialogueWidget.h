@@ -37,4 +37,22 @@ private:
 public:
 	void InitializeProperties(FString FileName);
 	
+
+
+
+
+	//
+protected:
+	UPROPERTY(meta = (BindWidget))
+	class URE_Dialogue_Selection* BP_Dialogue_Selection;
+
+
+	void InspectDialogueSelectBool();
+	void InspectNextDialogue();
+
+	bool VisibleDialogueSelection = false;
+
+	struct FRE_Dialogue* DialogueRow;
+
+	bool HasNextDialogue = true;
 };
