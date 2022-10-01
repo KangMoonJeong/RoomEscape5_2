@@ -1,0 +1,28 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "5.0",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "RoomEscape",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine",
+				"UMG",
+				"CoreUObject"
+			]
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "DatasmithImporter",
+			"Enabled": true
+		},
+		{
+			"Name": "DatasmithFBXImporter",
+			"Enabled": true
+		}
+	]
+}
