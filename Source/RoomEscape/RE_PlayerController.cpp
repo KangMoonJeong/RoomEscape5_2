@@ -186,20 +186,27 @@ void ARE_PlayerController::InitializeGameData()
 	URE_GameInstance* RE_GameInstance = Cast<URE_GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	if (!RE_GameInstance)
 		return;
+	DialogueWidget = CreateWidget<URE_DialogueWidget>(GetWorld(), DialogueWidgetClass);
 
 	// 게임 데이터 초기화시
 	if (!SaveGame)
 	{
-		URE_DialogueWidget* DialogueWidget = CreateWidget<URE_DialogueWidget>(GetWorld(), DialogueWidgetClass);
 		OnCurrentWidgetOffHUD(DialogueWidget, EInputMode::EIM_UIOnly);
 		DialogueWidget->InitializeProperties("DataTable'/Game/707/Quest/Intro.Intro'");
+		DialogueWidget->InitializeData(10);
 		RE_GameInstance->InitializeQuestProperties({}, 0, 0);
 		RE_GameInstance->InitializeAllItemSlotData({}, {}, {}, {}, {}, {}, {}, {});
 		return;
 	}
 	
 
+
 	// 게임 데이터 세이브나 로드시 -> 로드
+
+	DialogueWidget->InitializeData(SaveGame->LoveCount);
+	LoveCount = SaveGame->LoveCount;
+
+
 	
 	/* Game Item To Slot Data */
 	TArray<int32> DestroyedItemNumArray = SaveGame->DestroyedItemNumArray;
@@ -282,7 +289,9 @@ void ARE_PlayerController::SaveGameData()
 	
 	AFP_FirstPersonCharacter* PlayerCharacter = Cast<AFP_FirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
 	URE_GameInstance* RE_GameInstance = Cast<URE_GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-	if (!PlayerCharacter && !RE_GameInstance)
+	//URE_DialogueWidget* DialogueWidget = CreateWidget<URE_DialogueWidget>(GetWorld(), DialogueWidgetClass);
+
+	if (!PlayerCharacter && !RE_GameInstance &&!DialogueWidget)
 		return;
 	
 	SaveGame->PlayerLocation = PlayerCharacter->GetActorLocation();
@@ -294,6 +303,12 @@ void ARE_PlayerController::SaveGameData()
 	SaveGame->CurrentQuestIndex = RE_GameInstance->GetCurrentQuestIndex();
 	SaveGame->Chapter = RE_GameInstance->GetWholeChapter();
 	SaveGame->SolvedQuestMap = RE_GameInstance->GetSolvedQuestMap();
+	SaveGame->LoveCount = DialogueWidget->GetLoveCount();
+
+	UE_LOG(LogTemp, Warning, TEXT("ARE_PlayerController:: SaveGame->LoveCount : %d"), SaveGame->LoveCount);
+	UE_LOG(LogTemp, Warning, TEXT("ARE_PlayerController:: DialogueWidget->LoveCount : %d"), DialogueWidget->LoveCount);
+
+	
 
 	UGameplayStatics::SaveGameToSlot(SaveGame, SaveGame->SlotArray[SelectedIndex], 0);
 }

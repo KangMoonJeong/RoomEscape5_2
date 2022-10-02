@@ -52,5 +52,10 @@ public:
 
 	UPROPERTY()
 	TArray<int32> SolvedQuestMap; 
+	
+
+	UPROPERTY()
+	int32 LoveCount;
+
 
 };

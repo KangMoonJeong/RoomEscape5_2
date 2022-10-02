@@ -284,7 +284,10 @@ void AFP_FirstPersonCharacter::QuitGame()
 
 void AFP_FirstPersonCharacter::ToggleTemp()
 {
-	PlayerController->SetInputmodeandCursor(EInputMode::EIM_GameandUI);
+	//PlayerController->SetInputmodeandCursor(EInputMode::EIM_GameandUI);
+	PlayerController->LoveCount;
+	UE_LOG(LogTemp, Warning, TEXT("AFP_FirstPersonCharacter::Saved LoveCount : %d"), PlayerController->LoveCount);
+
 }
 
 void AFP_FirstPersonCharacter::RelocationGridPanel()

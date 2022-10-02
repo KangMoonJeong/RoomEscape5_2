@@ -121,4 +121,9 @@ public:
 	void SaveGameData();
 	void LoadSelectedSaveGameSlot();
 	void DeleteGameData();
+
+
+	int32 LoveCount;
+
+	class URE_DialogueWidget* DialogueWidget;
 };

@@ -37,4 +37,11 @@ public:
 	UPROPERTY()
 	int32 ResultSum2;
 
+
+	UPROPERTY()
+	int32 ResultLoveCount1;
+
+	UPROPERTY()
+	int32 ResultLoveCount2;
+
 };

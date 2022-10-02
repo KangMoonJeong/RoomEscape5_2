@@ -72,5 +72,9 @@ protected:
 	void FindCurrentRowNum();
 
 
+public:
+	int32 GetLoveCount();
+	void InitializeData(int32 SetResultLoveCount);
+	int32 LoveCount;
 
 };

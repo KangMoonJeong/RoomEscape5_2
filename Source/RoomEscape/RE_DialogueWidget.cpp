@@ -47,11 +47,27 @@ void URE_DialogueWidget::InitializeProperties(FString FileName)
 
 
 
+void URE_DialogueWidget::InitializeData(int32 SetResultLoveCount)
+{
+	LoveCount = SetResultLoveCount;
+}
+
+int32 URE_DialogueWidget::GetLoveCount()
+{
+	return LoveCount;
+}
+
+
+
+
+
+
 /* 일반 대사*/
 void URE_DialogueWidget::FindCurrentRowNum()
 {
 	CurrentRowNum += (*DialogueRow).Sum;
 }
+
 
 void URE_DialogueWidget::InspectNextDialogue()
 {
@@ -107,6 +123,9 @@ void URE_DialogueWidget::SelectionButton1_OnClicked()
 	VisibleDialogueSelection = false;
 
 	CurrentRowNum += (*DialogueRow).ResultSum1;
+	LoveCount += (*DialogueRow).ResultLoveCount1;
+
+	UE_LOG(LogTemp, Warning, TEXT("LoveCount : %d"), LoveCount);
 
 }
 
@@ -116,6 +135,9 @@ void URE_DialogueWidget::SelectionButton2_OnClicked()
 	VisibleDialogueSelection = false;
 
 	CurrentRowNum += (*DialogueRow).ResultSum2;
+	LoveCount += (*DialogueRow).ResultLoveCount2;
+
+	UE_LOG(LogTemp, Warning, TEXT("LoveCount : %d"), LoveCount);
 
 }
 
