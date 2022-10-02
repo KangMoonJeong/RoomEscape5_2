@@ -193,8 +193,7 @@ void ARE_PlayerController::InitializeGameData()
 	{
 		OnCurrentWidgetOffHUD(DialogueWidget, EInputMode::EIM_UIOnly);
 		DialogueWidget->InitializeProperties("DataTable'/Game/707/Quest/Intro.Intro'");
-		DialogueWidget->InitializeData(10);
-		RE_GameInstance->InitializeQuestProperties({}, 0, 0);
+		RE_GameInstance->InitializeQuestProperties({},10, 0, 0);
 		RE_GameInstance->InitializeAllItemSlotData({}, {}, {}, {}, {}, {}, {}, {});
 		return;
 	}
@@ -203,7 +202,6 @@ void ARE_PlayerController::InitializeGameData()
 
 	// 게임 데이터 세이브나 로드시 -> 로드
 
-	DialogueWidget->InitializeData(SaveGame->LoveCount);
 	LoveCount = SaveGame->LoveCount;
 
 
@@ -280,7 +278,7 @@ void ARE_PlayerController::InitializeGameData()
 
 
 	/* Quest */
-	RE_GameInstance->InitializeQuestProperties(SaveGame->Chapter, SaveGame->CurrentChpaterIndex, SaveGame->CurrentQuestIndex);
+	RE_GameInstance->InitializeQuestProperties(SaveGame->Chapter, SaveGame->LoveCount, SaveGame->CurrentChpaterIndex, SaveGame->CurrentQuestIndex);
 }
 
 void ARE_PlayerController::SaveGameData()
@@ -289,7 +287,6 @@ void ARE_PlayerController::SaveGameData()
 	
 	AFP_FirstPersonCharacter* PlayerCharacter = Cast<AFP_FirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
 	URE_GameInstance* RE_GameInstance = Cast<URE_GameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-	//URE_DialogueWidget* DialogueWidget = CreateWidget<URE_DialogueWidget>(GetWorld(), DialogueWidgetClass);
 
 	if (!PlayerCharacter && !RE_GameInstance &&!DialogueWidget)
 		return;
@@ -303,10 +300,10 @@ void ARE_PlayerController::SaveGameData()
 	SaveGame->CurrentQuestIndex = RE_GameInstance->GetCurrentQuestIndex();
 	SaveGame->Chapter = RE_GameInstance->GetWholeChapter();
 	SaveGame->SolvedQuestMap = RE_GameInstance->GetSolvedQuestMap();
-	SaveGame->LoveCount = DialogueWidget->GetLoveCount();
+	SaveGame->LoveCount = RE_GameInstance->GetLoveCount();
 
 	UE_LOG(LogTemp, Warning, TEXT("ARE_PlayerController:: SaveGame->LoveCount : %d"), SaveGame->LoveCount);
-	UE_LOG(LogTemp, Warning, TEXT("ARE_PlayerController:: DialogueWidget->LoveCount : %d"), DialogueWidget->LoveCount);
+	UE_LOG(LogTemp, Warning, TEXT("ARE_PlayerController:: RE_GameInstance->LoveCount : %d"), RE_GameInstance->GetLoveCount());
 
 	
 

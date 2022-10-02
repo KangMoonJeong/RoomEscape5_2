@@ -55,7 +55,7 @@ private:
 
 	/* Initialize SetChapter, CurrentQuest, CurrentChapterIndex, CurrentQuestIndex */
 public:
-	void InitializeQuestProperties(TArray<FChapter> SetChapter, int32 SetChapterIdex = 0, int32 SetQuestIndex = 0);
+	void InitializeQuestProperties(TArray<FChapter> SetChapter, int32 SetLoveCount, int32 SetChapterIdex = 0, int32 SetQuestIndex = 0);
 
 
 
@@ -161,4 +161,12 @@ public:
 	TSubclassOf<class UUserWidget> DialogueWidgetClass;
 
 	
+
+
+private:
+	int32 LoveCount = 10;
+
+public:
+	void SetLoveCount(int32 SetLoveCount);
+	int32 GetLoveCount();
 };

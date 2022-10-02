@@ -13,7 +13,7 @@ void URE_GameInstance::Init()
 }
 
 /* Initialize CurrentChapterIndex, CurrentQuestIndex, CurrentQuest */
-void URE_GameInstance::InitializeQuestProperties(TArray<FChapter> SetChapter, int32 SetChapterIdex, int32 SetQuestIndex)
+void URE_GameInstance::InitializeQuestProperties(TArray<FChapter> SetChapter, int32 SetLoveCount, int32 SetChapterIdex, int32 SetQuestIndex)
 {
 	if (SetChapter.Num() == 0) 
 	{
@@ -21,6 +21,7 @@ void URE_GameInstance::InitializeQuestProperties(TArray<FChapter> SetChapter, in
 		CurrentChapterIndex = SetChapterIdex;
 		CurrentQuestIndex = SetQuestIndex;
 		CurrentQuest = Chapter[0].Quest[0];
+		LoveCount = 10;
 		return;
 	}
 	else
@@ -30,6 +31,7 @@ void URE_GameInstance::InitializeQuestProperties(TArray<FChapter> SetChapter, in
 		Chapter = SetChapter;
 		CurrentQuest = Chapter[SetChapterIdex].Quest[SetQuestIndex];
 		SetQuestActorNumMapFromInventory();
+		LoveCount = SetLoveCount;
 	}
 }
 
@@ -108,7 +110,7 @@ void URE_GameInstance::OpenDialogueWidget()
 	
 
 	RE_PlayerController->OnCurrentWidgetOffHUD(DialogueWidget, EInputMode::EIM_UIOnly);
-	DialogueWidget->InitializeProperties(CurrentQuest.DialogueFileName);
+	DialogueWidget->InitializeProperties(CurrentQuest.DialogueFileName, LoveCount);
 }
 
 
@@ -517,4 +519,20 @@ int32 URE_GameInstance::GetNoLimitSlotArrayFirstItemNum()
 	{
 		return -1;
 	}
+}
+
+
+
+
+
+
+
+void URE_GameInstance::SetLoveCount(int32 SetLoveCount)
+{
+	LoveCount = SetLoveCount;
+}
+
+int32 URE_GameInstance::GetLoveCount()
+{
+	return LoveCount;
 }

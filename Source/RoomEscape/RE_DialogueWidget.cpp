@@ -5,6 +5,7 @@
 #include "RE_Dialogue.h"
 #include "RE_PlayerController.h"
 #include "RE_Dialogue_Selection.h"
+#include "RE_GameInstance.h"
 #include "Components\Button.h"
 
 
@@ -12,15 +13,22 @@
 void URE_DialogueWidget::RemoveWidget()
 {
 	ARE_PlayerController* RE_PlayerController = Cast<ARE_PlayerController>(GetWorld()->GetFirstPlayerController());
-	if (!RE_PlayerController)
+
+	URE_GameInstance* GameInstance = Cast<URE_GameInstance>(GetWorld()->GetGameInstance());
+
+
+	if (!RE_PlayerController && !GameInstance)
 		return;
 
 	CurrentRowNum = 0;
 	
 	RE_PlayerController->OnHUDOffCurrentWidget();
+
+	GameInstance->SetLoveCount(LoveCount);
+
 }
 
-void URE_DialogueWidget::InitializeProperties(FString FileName)
+void URE_DialogueWidget::InitializeProperties(FString FileName, int32 SetLoveCount)
 {
 	if (*FileName == FString(""))
 		return;
@@ -41,6 +49,9 @@ void URE_DialogueWidget::InitializeProperties(FString FileName)
 
 	InspectNextDialogue();
 	SetCurrentlyRow();
+
+
+	LoveCount = SetLoveCount;
 }
 
 
@@ -122,10 +133,12 @@ void URE_DialogueWidget::SelectionButton1_OnClicked()
 	BP_Dialogue_Selection->SetVisibility(ESlateVisibility::Collapsed);
 	VisibleDialogueSelection = false;
 
+	UE_LOG(LogTemp, Warning, TEXT("Before SelectionButton1_OnClicked::LoveCount : %d, ResultLoveCount1 : %d"), LoveCount, (*DialogueRow).ResultLoveCount1);
+
 	CurrentRowNum += (*DialogueRow).ResultSum1;
 	LoveCount += (*DialogueRow).ResultLoveCount1;
 
-	UE_LOG(LogTemp, Warning, TEXT("LoveCount : %d"), LoveCount);
+	UE_LOG(LogTemp, Warning, TEXT("After SelectionButton1_OnClicked::LoveCount : %d, ResultLoveCount1 : %d"), LoveCount, (*DialogueRow).ResultLoveCount1);
 
 }
 
@@ -134,10 +147,12 @@ void URE_DialogueWidget::SelectionButton2_OnClicked()
 	BP_Dialogue_Selection->SetVisibility(ESlateVisibility::Collapsed);
 	VisibleDialogueSelection = false;
 
+	UE_LOG(LogTemp, Warning, TEXT("Before SelectionButton2_OnClicked::LoveCount : %d, ResultLoveCount2 : %d"), LoveCount, (*DialogueRow).ResultLoveCount2);
+
 	CurrentRowNum += (*DialogueRow).ResultSum2;
 	LoveCount += (*DialogueRow).ResultLoveCount2;
 
-	UE_LOG(LogTemp, Warning, TEXT("LoveCount : %d"), LoveCount);
+	UE_LOG(LogTemp, Warning, TEXT("After SelectionButton2_OnClicked::LoveCount : %d, ResultLoveCount2 : %d"), LoveCount, (*DialogueRow).ResultLoveCount2);
 
 }
 

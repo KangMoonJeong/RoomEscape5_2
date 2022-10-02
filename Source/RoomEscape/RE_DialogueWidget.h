@@ -35,7 +35,7 @@ private:
 	int32 CurrentRowNum = 1;
 
 public:
-	void InitializeProperties(FString FileName);
+	void InitializeProperties(FString FileName, int32 SetLoveCount = 10);
 	
 
 
