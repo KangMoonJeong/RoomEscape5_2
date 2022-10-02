@@ -1,4 +1,5 @@
-#include "RE_SaveListUnitWidget.h"
+#include "RE_LoungeWidgetSaveUnit.h"
+
 #include "Components\WidgetSwitcher.h"
 #include "Components\Button.h"
 #include "Components\Image.h"
@@ -9,16 +10,16 @@
 #include "Engine\Texture2D.h"
 
 
-bool URE_SaveListUnitWidget::Initialize()
+bool URE_LoungeWidgetSaveUnit::Initialize()
 {
 	if (!Super::Initialize())
 		return false;
 
 	SetSaveStatus();
 
-	SaveLoad_SaveButton->OnClicked.AddDynamic(this, &URE_SaveListUnitWidget::SaveToSlot);
-	SaveLoad_LoadButton->OnClicked.AddDynamic(this, &URE_SaveListUnitWidget::LoadToSlot);
-	Load_LoadButton->OnClicked.AddDynamic(this, &URE_SaveListUnitWidget::LoadToSlot);
+	SaveLoad_SaveButton->OnClicked.AddDynamic(this, &URE_LoungeWidgetSaveUnit::SaveToSlot);
+	SaveLoad_LoadButton->OnClicked.AddDynamic(this, &URE_LoungeWidgetSaveUnit::LoadToSlot);
+	Load_LoadButton->OnClicked.AddDynamic(this, &URE_LoungeWidgetSaveUnit::LoadToSlot);
 
 	return true;
 }
@@ -30,7 +31,7 @@ bool URE_SaveListUnitWidget::Initialize()
 
 
 /* Save and Load */
-URE_SaveGame * URE_SaveListUnitWidget::GetMasterSlot()
+URE_SaveGame* URE_LoungeWidgetSaveUnit::GetMasterSlot()
 {
 	URE_SaveGame* MasterSlot = Cast<URE_SaveGame>(UGameplayStatics::CreateSaveGameObject(URE_SaveGame::StaticClass()));
 
@@ -40,7 +41,7 @@ URE_SaveGame * URE_SaveListUnitWidget::GetMasterSlot()
 	return MasterSlot;
 }
 
-void URE_SaveListUnitWidget::SaveSelectedSlotIndex(int32 SetSlotIndex)
+void URE_LoungeWidgetSaveUnit::SaveSelectedSlotIndex(int32 SetSlotIndex)
 {
 	URE_SaveGame* MasterSlot = GetMasterSlot();
 
@@ -49,7 +50,7 @@ void URE_SaveListUnitWidget::SaveSelectedSlotIndex(int32 SetSlotIndex)
 	UGameplayStatics::SaveGameToSlot(MasterSlot, "MasterSlot", 0);
 }
 
-void URE_SaveListUnitWidget::SaveToSlot()
+void URE_LoungeWidgetSaveUnit::SaveToSlot()
 {
 	SaveSelectedSlotIndex(SlotIndex);
 
@@ -62,14 +63,14 @@ void URE_SaveListUnitWidget::SaveToSlot()
 
 }
 
-void URE_SaveListUnitWidget::LoadToSlot()
+void URE_LoungeWidgetSaveUnit::LoadToSlot()
 {
 	SaveSelectedSlotIndex(SlotIndex);
 
 	UGameplayStatics::OpenLevel(GetWorld(), MapName, true);
 }
 
-void URE_SaveListUnitWidget::SetSaveStatus()
+void URE_LoungeWidgetSaveUnit::SetSaveStatus()
 {
 	URE_SaveGame* MasterSlot = GetMasterSlot();
 
@@ -86,7 +87,7 @@ void URE_SaveListUnitWidget::SetSaveStatus()
 
 
 /* Mouse Enter and Leave */
-void URE_SaveListUnitWidget::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
+void URE_LoungeWidgetSaveUnit::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
 {
 	URE_SaveGame* MasterSlot = GetMasterSlot();
 
@@ -97,7 +98,7 @@ void URE_SaveListUnitWidget::NativeOnMouseEnter(const FGeometry& InGeometry, con
 	}
 }
 
-void URE_SaveListUnitWidget::NativeOnMouseLeave(const FPointerEvent & InMouseEvent)
+void URE_LoungeWidgetSaveUnit::NativeOnMouseLeave(const FPointerEvent& InMouseEvent)
 {
 	OpacityImage->SetVisibility(ESlateVisibility::Hidden);
 	SaveLoadWidgetSwitcher->SetVisibility(ESlateVisibility::Hidden);
@@ -107,8 +108,8 @@ void URE_SaveListUnitWidget::NativeOnMouseLeave(const FPointerEvent & InMouseEve
 
 
 
-	/* Widget Switcher */
-void URE_SaveListUnitWidget::SetActiveWidgetIndex(int Set)
+/* Widget Switcher */
+void URE_LoungeWidgetSaveUnit::SetActiveWidgetIndex(int Set)
 {
 	SaveLoadWidgetSwitcher->SetActiveWidgetIndex(Set);
 }

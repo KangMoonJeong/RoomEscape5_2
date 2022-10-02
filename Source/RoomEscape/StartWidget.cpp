@@ -10,9 +10,6 @@ bool UStartWidget::Initialize()
 	bool Success = UUserWidget::Initialize();
 	if (!Success)
 		return false;
-	UE_LOG(LogTemp, Warning, TEXT("0930fsdfvsdfsdf"));
-
-	UE_LOG(LogTemp, Warning, TEXT("093009300930"));
 
 
 	NewGame_Button->OnClicked.AddDynamic(this, &UStartWidget::NewGameOnClicked);
