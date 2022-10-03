@@ -1,5 +1,4 @@
 #include "RE_LoungeWidgetSaveUnit.h"
-
 #include "Components\WidgetSwitcher.h"
 #include "Components\Button.h"
 #include "Components\Image.h"
@@ -19,8 +18,8 @@ bool URE_LoungeWidgetSaveUnit::Initialize()
 
 	SaveLoad_SaveButton->OnClicked.AddDynamic(this, &URE_LoungeWidgetSaveUnit::SaveToSlot);
 	SaveLoad_LoadButton->OnClicked.AddDynamic(this, &URE_LoungeWidgetSaveUnit::LoadToSlot);
-	Load_LoadButton->OnClicked.AddDynamic(this, &URE_LoungeWidgetSaveUnit::LoadToSlot);
-
+	SaveLoad_SaveButton2->OnClicked.AddDynamic(this, &URE_LoungeWidgetSaveUnit::SaveToSlot);
+	
 	return true;
 }
 
@@ -94,12 +93,14 @@ void URE_LoungeWidgetSaveUnit::NativeOnMouseEnter(const FGeometry& InGeometry, c
 	if (UGameplayStatics::DoesSaveGameExist(MasterSlot->SlotArray[this->SlotIndex], 0))
 	{
 		SaveLoadWidgetSwitcher->SetActiveWidgetIndex(0);
-		/*OpacityImage->SetVisibility(ESlateVisibility::Visible);
-		SaveLoadWidgetSwitcher->SetVisibility(ESlateVisibility::Visible);*/
+		OpacityImage->SetVisibility(ESlateVisibility::Visible);
+		SaveLoadWidgetSwitcher->SetVisibility(ESlateVisibility::Visible);
 	}
 	else
 	{
-		SaveLoadWidgetSwitcher->SetActiveWidgetIndex(2);
+		SaveLoadWidgetSwitcher->SetActiveWidgetIndex(1);
+		OpacityImage->SetVisibility(ESlateVisibility::Visible);
+		SaveLoadWidgetSwitcher->SetVisibility(ESlateVisibility::Visible);
 	}
 }
 

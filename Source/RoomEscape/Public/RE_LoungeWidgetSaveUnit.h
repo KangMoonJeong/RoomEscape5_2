@@ -16,22 +16,26 @@ protected:
 		class UWidgetSwitcher* SaveLoadWidgetSwitcher;
 
 	UPROPERTY(meta = (BindWidget))
-		class UButton* SaveLoad_SaveButton;
+	class UButton* SaveLoad_SaveButton;
 
 	UPROPERTY(meta = (BindWidget))
-		class UButton* SaveLoad_LoadButton;
+	class UButton* SaveLoad_LoadButton;
+
+
+	/*UPROPERTY(meta = (BindWidget))
+	class UButton* Load_LoadButton;*/
+	
+	UPROPERTY(meta = (BindWidget))
+	class UButton* SaveLoad_SaveButton2;
 
 	UPROPERTY(meta = (BindWidget))
-		class UButton* Load_LoadButton;
+	class UImage* SavedImage;
 
 	UPROPERTY(meta = (BindWidget))
-		class UImage* SavedImage;
+	class UImage* OpacityImage;
 
 	UPROPERTY(meta = (BindWidget))
-		class UImage* OpacityImage;
-
-	UPROPERTY(meta = (BindWidget))
-		class UTextBlock* SaveStatusText;
+	class UTextBlock* SaveStatusText;
 
 
 
@@ -45,20 +49,20 @@ private:
 
 protected:
 	UFUNCTION()
-		void SaveToSlot();
+	void SaveToSlot();
 
 	UFUNCTION()
-		void LoadToSlot();
+	void LoadToSlot();
 
 protected:
 	UPROPERTY(EditAnywhere, Category = "707")
-		int32 SlotIndex;
+	int32 SlotIndex;
 
 	UPROPERTY(EditAnywhere, Category = "707")
-		FName MapName;
+	FName MapName;
 
 	UPROPERTY(EditAnywhere, Category = "707")
-		TArray<class UTexture2D*> SavedImageArray;
+	TArray<class UTexture2D*> SavedImageArray;
 
 private:
 	void SetSaveStatus();
