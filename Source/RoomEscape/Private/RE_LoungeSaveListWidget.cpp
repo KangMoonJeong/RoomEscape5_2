@@ -1,23 +1,21 @@
-#include "SaveListWidget.h"
-#include "RE_SaveListUnitWidget.h"
+
+#include "RE_LoungeSaveListWidget.h"
 #include "Components/Button.h"
 #include "Public\RE_LoungeWidgetSaveUnit.h"
 
-
-
-bool USaveListWidget::Initialize()
+bool URE_LoungeSaveListWidget::Initialize()
 {
 	if (Super::Initialize() == false)
 		return false;
 
-	X_Button->OnClicked.AddDynamic(this, &USaveListWidget::X_ButtonOnClicked);
+	X_Button->OnClicked.AddDynamic(this, &URE_LoungeSaveListWidget::X_ButtonOnClicked);
 
 	return true;
 }
 
 
-	/* Widget Switcher Setting */
-void USaveListWidget::SetSaveListUnitWidgetIndex(int32 Set)
+/* Widget Switcher Setting */
+void URE_LoungeSaveListWidget::SetSaveListUnitWidgetIndex(int32 Set)
 {
 	SaveListUnitWidget_1->SetActiveWidgetIndex(Set);
 	SaveListUnitWidget_2->SetActiveWidgetIndex(Set);
@@ -35,10 +33,7 @@ void USaveListWidget::SetSaveListUnitWidgetIndex(int32 Set)
 
 
 
-	/* X_Button On Clicked Remove From Parent */
-void USaveListWidget::X_ButtonOnClicked()
+/* X_Button On Clicked Remove From Parent */
+void URE_LoungeSaveListWidget::X_ButtonOnClicked()
 {
 	RemoveFromParent();
-}
-
-

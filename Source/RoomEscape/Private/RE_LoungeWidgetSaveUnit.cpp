@@ -4,9 +4,9 @@
 #include "Components\Button.h"
 #include "Components\Image.h"
 #include "Components\TextBlock.h"
-#include "RE_PlayerController.h"
+#include "RoomEscape\RE_PlayerController.h"
 #include "Kismet/GameplayStatics.h"
-#include "RE_SaveGame.h"
+#include "RoomEscape\RE_SaveGame.h"
 #include "Engine\Texture2D.h"
 
 
@@ -93,8 +93,13 @@ void URE_LoungeWidgetSaveUnit::NativeOnMouseEnter(const FGeometry& InGeometry, c
 
 	if (UGameplayStatics::DoesSaveGameExist(MasterSlot->SlotArray[this->SlotIndex], 0))
 	{
-		OpacityImage->SetVisibility(ESlateVisibility::Visible);
-		SaveLoadWidgetSwitcher->SetVisibility(ESlateVisibility::Visible);
+		SaveLoadWidgetSwitcher->SetActiveWidgetIndex(0);
+		/*OpacityImage->SetVisibility(ESlateVisibility::Visible);
+		SaveLoadWidgetSwitcher->SetVisibility(ESlateVisibility::Visible);*/
+	}
+	else
+	{
+		SaveLoadWidgetSwitcher->SetActiveWidgetIndex(2);
 	}
 }
 
