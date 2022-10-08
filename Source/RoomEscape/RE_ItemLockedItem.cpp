@@ -28,6 +28,7 @@ ARE_ItemLockedItem::ARE_ItemLockedItem()
 
 
 	/* TimeLine*/
+
 	FOnTimelineFloat progressFunction_Left{};
 	progressFunction_Left.BindUFunction(this, "LeftDoorRotation");
 
@@ -110,12 +111,42 @@ void ARE_ItemLockedItem::Interact()
 /* TimeLine */
 void ARE_ItemLockedItem::LeftDoorRotation(float Value)
 {
-	RightDoor->SetRelativeRotation(FRotator(0, Value, 0)); // 180
+	if (bRight)
+	{
+		if (bSlide)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("bRight, bSlide"))
+			RightDoor->SetRelativeLocation(FVector(Value, 0, 0));
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("bRight, No bSlide"))
+			RightDoor->SetRelativeRotation(FRotator(0, Value, 0)); // 180
+		}
+	}
+	//if (bRightDoor)
+	//	RightDoor->SetRelativeRotation(FRotator(0, Value, 0)); // 180
 }
 
 void ARE_ItemLockedItem::RightDoorRotation(float Value)
 {
-	LeftDoor->SetRelativeRotation(FRotator(0, Value, 0)); // 0
+	if (bLeft)
+	{
+		if (bSlide)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("bLeft, bSlide"))
+			LeftDoor->SetRelativeLocation(FVector(Value, 0, 0));
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("bLeft, No bSlide"))
+			LeftDoor->SetRelativeRotation(FRotator(0, Value, 0)); // 0
+		}
+
+	}
+
+	//if (bLeftDoor)
+	//	LeftDoor->SetRelativeRotation(FRotator(0, Value, 0)); // 0
 }
 
 void ARE_ItemLockedItem::TimeLineFinish()
@@ -146,8 +177,17 @@ void ARE_ItemLockedItem::SolevedItem()
 {
 	bEverSolveLock = true;
 
-	LeftDoor->SetRelativeRotation(LeftDoorRotator);
-	RightDoor->SetRelativeRotation(RightDoorRotator);
+	if (bSlide)
+	{
+		LeftDoor->SetRelativeLocation(LeftDoorLocation);
+		RightDoor->SetRelativeLocation(RightDoorLocation);
+	}
+	else
+	{
+		LeftDoor->SetRelativeRotation(LeftDoorRotator);
+		RightDoor->SetRelativeRotation(RightDoorRotator);
+
+	}
 
 	URE_GameInstance* GameInstance = Cast<URE_GameInstance>(GetWorld()->GetGameInstance());
 	GameInstance->AddSolvedQuestMapElement(ItemNum);

@@ -35,14 +35,14 @@ AFP_FirstPersonCharacter::AFP_FirstPersonCharacter()
 void AFP_FirstPersonCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
 	check(PlayerInputComponent);
-	
+
 	//PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	//PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
-	
+
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &AFP_FirstPersonCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AFP_FirstPersonCharacter::MoveRight);
-	
+
 	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
 	PlayerInputComponent->BindAxis("TurnRate", this, &AFP_FirstPersonCharacter::TurnAtRate);
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
@@ -66,7 +66,7 @@ void AFP_FirstPersonCharacter::SetupPlayerInputComponent(class UInputComponent* 
 	PlayerInputComponent->BindAction("Seven", IE_Pressed, this, &AFP_FirstPersonCharacter::PressSeven);
 	PlayerInputComponent->BindAction("Eight", IE_Pressed, this, &AFP_FirstPersonCharacter::PressEight);
 	PlayerInputComponent->BindAction("Nine", IE_Pressed, this, &AFP_FirstPersonCharacter::PressNine);
-	
+
 }
 
 
@@ -87,7 +87,7 @@ void AFP_FirstPersonCharacter::MoveForward(float Value)
 	{
 		AddMovementInput(GetActorForwardVector(), Value);
 	}
-	
+
 }
 
 void AFP_FirstPersonCharacter::MoveRight(float Value)
@@ -125,7 +125,7 @@ void AFP_FirstPersonCharacter::StartTrace()
 	//DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Green, false, 0.1f);
 	//DrawDebugPoint(GetWorld(), Hit.Location, 10.f, FColor::Black, false, 0.f);
 
-	
+
 	if (UKismetSystemLibrary::DoesImplementInterface(Hit.GetActor(), UInteraction_Interfece::StaticClass()))
 	{
 		// 기존 : nullptr, !nullptr / 신규 : !nullptr
@@ -169,7 +169,7 @@ void AFP_FirstPersonCharacter::ToggleWholeWidget()
 	RE_WholeWidget = CreateWidget<URE_WholeWidget>(GetWorld(), RE_WholeWidgetClass);
 	PlayerController->OnCurrentWidgetOffHUD(RE_WholeWidget, EInputMode::EIM_UIOnly);
 	PlayerController->ReleaseSlotLocation();
-	
+
 }
 
 
@@ -216,7 +216,7 @@ void AFP_FirstPersonCharacter::PressTwo()
 void AFP_FirstPersonCharacter::PressThree()
 {
 	PlayerController->DeliverSlotLocation(3);
-	PressedItemSlotLocation = 3;	
+	PressedItemSlotLocation = 3;
 }
 
 void AFP_FirstPersonCharacter::PressFour()
@@ -284,10 +284,7 @@ void AFP_FirstPersonCharacter::QuitGame()
 
 void AFP_FirstPersonCharacter::ToggleTemp()
 {
-	//PlayerController->SetInputmodeandCursor(EInputMode::EIM_GameandUI);
-	PlayerController->LoveCount;
-	UE_LOG(LogTemp, Warning, TEXT("AFP_FirstPersonCharacter::Saved LoveCount : %d"), PlayerController->LoveCount);
-
+	UE_LOG(LogTemp, Warning, TEXT("ToggleTemp() :%d"), 2);
 }
 
 void AFP_FirstPersonCharacter::RelocationGridPanel()

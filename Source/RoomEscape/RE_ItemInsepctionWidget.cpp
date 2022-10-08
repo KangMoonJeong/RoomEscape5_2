@@ -1,6 +1,4 @@
 #include "RE_ItemInsepctionWidget.h"
-#include "Components\GridPanel.h"
-#include "Components\GridSlot.h"
 #include "Components/Button.h"
 #include "RE_PlayerController.h"
 #include "Kismet/GameplayStatics.h"
@@ -8,6 +6,7 @@
 #include "ItemSlotInteraction_Interface.h"
 #include "RE_GameInstance.h"
 #include "ItemSlot.h"
+#include "Components\UniformGridPanel.h"
 
 
 bool URE_ItemInsepctionWidget::Initialize()
@@ -57,11 +56,12 @@ void URE_ItemInsepctionWidget::InitializeItemSlot_GridPanel()
 
 	for (int32 i = 0; i < NoLimitItemSlotArray.Num(); i++)
 	{
-		if (!NoLimitItemSlotArray.IsValidIndex(i))
-			return;
+		if (!NoLimitItemSlotArray[i]->IsValidLowLevel())
+			continue;
 
-		UGridSlot* GridSlot = ItemSlot_GridPanel->AddChildToGrid(NoLimitItemSlotArray[i], Row, Column++);
-		GridSlot->SetPadding(FMargin(20.f));
+		UWidget* ItemSlot = NoLimitItemSlotArray[i];
+		ItemSlot_UniformGridPanel->AddChildToUniformGrid(ItemSlot, Row, Column);
+
 		if (Column == 8)
 		{
 			Row++;
@@ -105,13 +105,13 @@ void URE_ItemInsepctionWidget::Left_ButtonOnClicked()
 	if (GameInstance->GetNoLimitItemSlotArray().Num() == 0)
 		return;
 	TArray<UItemSlot*> ItemSlotArray = GameInstance->GetNoLimitItemSlotArray();
-	
-	
+
+
 	if (ItemNum == 0)
 		ItemNum = ItemSlotArray.Num() - 1;
 	else
 		ItemNum--;
-	
+
 	ItemInspection_Interface->SetChildActorClassFromPath(ItemSlotArray[ItemNum]->GetItemNum());
 }
 
@@ -121,13 +121,13 @@ void URE_ItemInsepctionWidget::Right_ButtonOnClicked()
 	if (GameInstance->GetNoLimitItemSlotArray().Num() == 0)
 		return;
 	TArray<UItemSlot*> ItemSlotArray = GameInstance->GetNoLimitItemSlotArray();
-	
-	
+
+
 	if (ItemNum + 1 == ItemSlotArray.Num())
 		ItemNum = 0;
 	else
 		ItemNum++;
-	
+
 	ItemInspection_Interface->SetChildActorClassFromPath(ItemSlotArray[ItemNum]->GetItemNum());
 }
 

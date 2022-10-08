@@ -10,7 +10,7 @@ ARE_PasswordLockedItem::ARE_PasswordLockedItem()
 {
 	PrimaryActorTick.bCanEverTick = false;
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
-	
+
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	Mesh->SetupAttachment(GetRootComponent());
 
@@ -31,7 +31,7 @@ void ARE_PasswordLockedItem::BeginPlay()
 	WidgetBound->OnComponentEndOverlap.AddDynamic(this, &ARE_PasswordLockedItem::WidgetBoundEndOverlap);
 }
 
-void ARE_PasswordLockedItem::WidgetBoundBeginOverlap(UPrimitiveComponent * OverlappedComponent, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
+void ARE_PasswordLockedItem::WidgetBoundBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	if (OtherActor && !bEverSolveLock)
 	{
@@ -42,7 +42,7 @@ void ARE_PasswordLockedItem::WidgetBoundBeginOverlap(UPrimitiveComponent * Overl
 	}
 }
 
-void ARE_PasswordLockedItem::WidgetBoundEndOverlap(UPrimitiveComponent * OverlappedComponent, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex)
+void ARE_PasswordLockedItem::WidgetBoundEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 	if (OtherActor && !bEverSolveLock)
 	{
@@ -69,7 +69,6 @@ void ARE_PasswordLockedItem::SolevedItem()
 	bEverSolveLock = true;
 	URE_GameInstance* GameInstance = Cast<URE_GameInstance>(GetWorld()->GetGameInstance());
 	GameInstance->AddSolvedQuestMapElement(ItemNum);
-	UE_LOG(LogTemp, Warning, TEXT("ARE_PasswordLockedItem::SolevedItem()"));
 }
 
 int32 ARE_PasswordLockedItem::GetItemNum()

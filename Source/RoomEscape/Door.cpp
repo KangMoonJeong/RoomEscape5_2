@@ -1,7 +1,6 @@
 #include "Door.h"
 #include "Components/StaticMeshComponent.h"
 
-
 ADoor::ADoor()
 {
 	PrimaryActorTick.bCanEverTick = true;
@@ -38,10 +37,7 @@ ADoor::ADoor()
 
 void ADoor::BeginPlay()
 {
-	Super::BeginPlay();
-
-	TimeLine.Play();
-	
+	Super::BeginPlay();	
 }
 
 
@@ -57,11 +53,39 @@ void ADoor::Tick(float DeltaTime)
 
 void ADoor::RightDoorRotation(float Value)
 {
-	RightDoor->SetRelativeRotation(FRotator(0, Value, 0)); // 180
+	if (bRight)    
+	{
+		if (bSlide)
+		{
+			RightDoor->SetRelativeLocation(FVector(Value, 0, 0));
+		}
+		else
+		{
+			RightDoor->SetRelativeRotation(FRotator(0, Value, 0)); // 180
+		}
+	}
+//	RightDoor->SetRelativeRotation(FRotator(0, Value, 0)); // 180
+}
+
+void ADoor::Interact()
+{
+	TimeLine.Play();
 }
 
 void ADoor::LeftDoorRotation(float Value)
 {
-	LeftDoor->SetRelativeRotation(FRotator(0, Value, 0)); // 0
+	if (bLeft)
+	{
+		if (bSlide)
+		{
+			LeftDoor->SetRelativeLocation(FVector(Value, 0, 0));
+		}
+		else
+		{
+			LeftDoor->SetRelativeRotation(FRotator(0, Value, 0)); // 0
+		}
+
+	}
+	//LeftDoor->SetRelativeRotation(FRotator(0, Value, 0)); // 0
 	
 }

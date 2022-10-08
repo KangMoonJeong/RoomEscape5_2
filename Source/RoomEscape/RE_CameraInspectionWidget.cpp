@@ -8,6 +8,7 @@
 #include "Components\GridPanel.h"
 #include "Components\GridSlot.h"
 #include "Components/Button.h"
+#include "Components\UniformGridPanel.h"
 
 
 
@@ -69,13 +70,21 @@ void URE_CameraInspectionWidget::InitializeItemSlot_GridPanel()
 	int32 Row = 0;
 	int32 Column = 0;
 
+	UE_LOG(LogTemp, Warning, TEXT("URE_CameraInspectionWidget: :NoLimitItemSlotArray.Num() : %d"), NoLimitItemSlotArray.Num());
+
+
 	for (int32 i = 0; i < NoLimitItemSlotArray.Num(); i++)
 	{
-		if (!NoLimitItemSlotArray.IsValidIndex(i))
-			return;
+		if (!NoLimitItemSlotArray[i]->IsValidLowLevel())
+		{
+			UE_LOG(LogTemp, Warning, TEXT("if (!NoLimitItemSlotArray[i]->IsValidLowLevel()) : %d"), i);
+			continue;
+		}
 
-		UGridSlot* GridSlot = ItemSlot_GridPanel->AddChildToGrid(NoLimitItemSlotArray[i], Row, Column++);
-		GridSlot->SetPadding(FMargin(20.f));
+		UUserWidget* ItemSlot = NoLimitItemSlotArray[i];
+		ItemSlot_UniformGridPanel->AddChildToUniformGrid(ItemSlot, Row, Column);
+
+		Column++;
 		if (Column == 8)
 		{
 			Row++;
@@ -138,7 +147,7 @@ void URE_CameraInspectionWidget::Right_ButtonOnClicked()
 
 void URE_CameraInspectionWidget::ReLocationItemSlot_GridPanel()
 {
-	ItemSlot_GridPanel->ClearChildren();
+	ItemSlot_UniformGridPanel->ClearChildren();
 	InitializeItemSlot_GridPanel();
 }
 

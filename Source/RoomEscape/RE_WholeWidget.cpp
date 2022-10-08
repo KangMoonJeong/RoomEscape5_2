@@ -39,7 +39,7 @@ void URE_WholeWidget::X_ButtonOnClicked()
 		return;
 	RE_PlayerController->OnHUDOffCurrentWidget();
 	RE_PlayerController->GetHUDInitializeSlotBar();
-	
+
 
 	TArray<AActor*> InterfaceActor;
 	UGameplayStatics::GetAllActorsWithInterface(GetWorld(), UInspection_Interface::StaticClass(), InterfaceActor);
@@ -70,7 +70,7 @@ void URE_WholeWidget::Inventory_ButtonOnClicked()
 	CurrentWidget = BP_InventoryWidget;
 	Content_WidgetSwitcher->SetActiveWidgetIndex(1);
 	BP_InventoryWidget->InitializeData();
-	
+
 }
 
 void URE_WholeWidget::Inspection_ButtonOnClicked()
@@ -80,7 +80,7 @@ void URE_WholeWidget::Inspection_ButtonOnClicked()
 
 	CurrentWidget = BP_CameraInspectionWidget;
 	Content_WidgetSwitcher->SetActiveWidgetIndex(2);
-	
+
 	if (FirstItemInspectionWidgetOpen)
 	{
 		BP_CameraInspectionWidget->InitialSetting();
@@ -88,7 +88,7 @@ void URE_WholeWidget::Inspection_ButtonOnClicked()
 	}
 	else
 	{
-		BP_CameraInspectionWidget->InitializeItemSlot_GridPanel();
+		BP_CameraInspectionWidget->ReLocationItemSlot_GridPanel();
 	}
 
 }

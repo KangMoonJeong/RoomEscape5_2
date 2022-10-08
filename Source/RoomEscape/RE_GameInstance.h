@@ -40,13 +40,19 @@ private:
 	int32 CurrentQuestIndex = 0;
 	FQuest CurrentQuest;
 
-
+	UPROPERTY()
 	TArray<class UItemSlot*> TenLimitItemSlotArray;
+	UPROPERTY()
 	TArray<class UItemSlot*> OtherLimitItemSlotArray;
+	UPROPERTY()
 	TArray<class UItemSlot*> NoLimitItemSlotArray;
+	UPROPERTY()
 	TArray<int32> SolvedQuestMap;
+	UPROPERTY()
 	TMap<int32, bool> TenLimitItemSlotMap;
+	UPROPERTY()
 	TMap<int32, bool> OtherLimitItemSlotMap;
+	UPROPERTY()
 	TMap<int32, bool> NoLimitItemSlotMap;
 
 

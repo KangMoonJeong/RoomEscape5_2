@@ -77,9 +77,38 @@ void URE_SaveListUnitWidget::SetSaveStatus()
 	{
 		SaveStatusText->SetText(FText::FromString("Saved"));
 		SavedImage->SetBrushFromTexture(SavedImageArray[MasterSlot->SavedSlotImageIndex[this->SlotIndex]]);
+		if (LoadChapterStatusFromSlot())
+		{
+			#define LOCTEXT_NAMESPACE "MyNamespace"
+			SaveStatusText->SetText(FText::Format(LOCTEXT("", "{0} / {1}"), FText::AsNumber(Chapter), FText::AsNumber(Quest)));
+			SavedImage->SetBrushFromTexture(SavedImageArray[MasterSlot->SavedSlotImageIndex[this->SlotIndex]]);
+			#undef LOCTEXT_NAMESPACE
+		}
 	}
 }
 
+bool URE_SaveListUnitWidget::LoadChapterStatusFromSlot()
+{
+
+	URE_SaveGame* SaveGame = Cast<URE_SaveGame>(UGameplayStatics::CreateSaveGameObject(URE_SaveGame::StaticClass()));
+
+	// 게임 데이터 세이브나 로드시
+	if (UGameplayStatics::DoesSaveGameExist("MasterSlot", 0))
+	{
+
+		SaveGame = Cast<URE_SaveGame>(UGameplayStatics::LoadGameFromSlot("MasterSlot", 0));
+
+
+		if (UGameplayStatics::DoesSaveGameExist(SaveGame->SlotArray[SlotIndex], 0))
+		{
+			SaveGame = Cast<URE_SaveGame>(UGameplayStatics::LoadGameFromSlot(SaveGame->SlotArray[this->SlotIndex], 0));
+			Chapter = SaveGame->CurrentChpaterIndex;
+			Quest = SaveGame->CurrentQuestIndex;
+			return true;
+		}
+	}
+	return false;
+}
 
 
 

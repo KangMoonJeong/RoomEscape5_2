@@ -251,41 +251,46 @@ TArray<UItemSlot*> URE_GameInstance::GetNoLimitItemSlotArray()
 TMap<int32, bool> URE_GameInstance::GetNoLimitItemSlotMap()
 {
 	int32 i = 0;
+	TMap<int32, bool> EmptyMap = {};
 
-	for (auto& MapElem : NoLimitItemSlotMap)
+	for (auto& ArrayElem : NoLimitItemSlotArray)
 	{
-		MapElem.Key = NoLimitItemSlotArray[i]->GetItemNum();
+		EmptyMap.Add(ArrayElem->GetItemNum(), true);
 		i++;
 	}
-	
 
-	return NoLimitItemSlotMap;
+
+	return EmptyMap;
 }
 
 TMap<int32, bool> URE_GameInstance::GetOtherLimitItemSlotMap()
 {
 	int32 i = 0;
-	for (auto& MapElem : OtherLimitItemSlotMap)
+	TMap<int32, bool> EmptyMap = {};
+
+	for (auto& ArrayElem : TenLimitItemSlotArray)
 	{
-		MapElem.Key = OtherLimitItemSlotArray[i]->GetItemNum();
+
+		EmptyMap.Add(ArrayElem->GetItemNum(), true);
 		i++;
 	}
 
-	return OtherLimitItemSlotMap;
+	return EmptyMap;
 }
 
 TMap<int32, bool> URE_GameInstance::GetTenLimitItemSlotMap()
 {
 	int32 i = 0;
-	for (auto& MapElem : TenLimitItemSlotMap)
+	TMap<int32, bool> EmptyMap = {};
+
+	for (auto& ArrayElem : TenLimitItemSlotArray)
 	{
 
-		MapElem.Key = TenLimitItemSlotArray[i]->GetItemNum();
-		MapElem.Value = true;
+		EmptyMap.Add(ArrayElem->GetItemNum(), true);
 		i++;
 	}
 
-	return TenLimitItemSlotMap;
+	return EmptyMap;
 }
 
 

@@ -193,9 +193,16 @@ void ARE_PlayerController::InitializeGameData()
 	{
 		OnCurrentWidgetOffHUD(DialogueWidget, EInputMode::EIM_UIOnly);
 		DialogueWidget->InitializeProperties("DataTable'/Game/707/Quest/Intro.Intro'");
-		RE_GameInstance->InitializeQuestProperties({},10, 0, 0);
+		RE_GameInstance->InitializeQuestProperties({}, 0, 0);
 		RE_GameInstance->InitializeAllItemSlotData({}, {}, {}, {}, {}, {}, {}, {});
-		return;
+
+		//1004
+		AFP_FirstPersonCharacter* PlayerCharacter = Cast<AFP_FirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+		if (PlayerCharacter)
+			PlayerCharacter->SetActorLocation(FVector(-280.f, -160.f, -308.f));
+		else
+			UE_LOG(LogTemp, Warning, TEXT("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"))
+			return;
 	}
 	
 
@@ -273,12 +280,12 @@ void ARE_PlayerController::InitializeGameData()
 
 	/* Player Character Location Data */
 	AFP_FirstPersonCharacter* PlayerCharacter = Cast<AFP_FirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
-	if (PlayerCharacter) 
+	if (PlayerCharacter)
 		PlayerCharacter->SetActorLocation(SaveGame->PlayerLocation);
 
 
 	/* Quest */
-	RE_GameInstance->InitializeQuestProperties(SaveGame->Chapter, SaveGame->LoveCount, SaveGame->CurrentChpaterIndex, SaveGame->CurrentQuestIndex);
+	RE_GameInstance->InitializeQuestProperties(SaveGame->Chapter, SaveGame->CurrentChpaterIndex, SaveGame->CurrentQuestIndex);
 }
 
 void ARE_PlayerController::SaveGameData()

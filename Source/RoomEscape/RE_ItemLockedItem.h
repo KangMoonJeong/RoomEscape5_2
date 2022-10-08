@@ -53,6 +53,12 @@ private:
 	UPROPERTY(EditAnywhere)
 	FRotator RightDoorRotator;
 
+	UPROPERTY(EditAnywhere)
+	FVector LeftDoorLocation;
+
+	UPROPERTY(EditAnywhere)
+	FVector RightDoorLocation;
+
 	FTimeline TimeLine;
 	
 	int32 SelectTenLimitIndex = -1;
@@ -116,6 +122,15 @@ public:
 
 
 
+	
 
+	UPROPERTY(EditAnywhere)
+	bool bSlide;
+
+	UPROPERTY(EditAnywhere)
+	bool bLeft;
+
+	UPROPERTY(EditAnywhere)
+	bool bRight;
 
 };

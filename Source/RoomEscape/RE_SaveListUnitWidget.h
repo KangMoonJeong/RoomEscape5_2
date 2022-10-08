@@ -81,4 +81,12 @@ protected:
 	/* Widget Switcher */
 public:
 	void SetActiveWidgetIndex(int Set);
+
+
+	int32 Quest;
+	int32 Chapter;
+
+
+	/***/
+	bool LoadChapterStatusFromSlot();
 };

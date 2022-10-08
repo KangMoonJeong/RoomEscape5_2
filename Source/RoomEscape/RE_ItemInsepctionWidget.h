@@ -16,13 +16,16 @@ public:
 
 protected:
 	UPROPERTY(meta = (BindWidget))
-	class UGridPanel* ItemSlot_GridPanel;
+		class UGridPanel* ItemSlot_GridPanel;
 
 	UPROPERTY(meta = (BindWidget))
-	class UButton* Left_Button;
+		class UUniformGridPanel* ItemSlot_UniformGridPanel;
 
 	UPROPERTY(meta = (BindWidget))
-	class UButton* Right_Button;
+		class UButton* Left_Button;
+
+	UPROPERTY(meta = (BindWidget))
+		class UButton* Right_Button;
 
 	class IItemSlotInteraction_Interface* ItemInspection_Interface;
 
@@ -46,8 +49,8 @@ public:
 	/* Click Event */
 protected:
 	UFUNCTION()
-	void Left_ButtonOnClicked();
+		void Left_ButtonOnClicked();
 
 	UFUNCTION()
-	void Right_ButtonOnClicked();
+		void Right_ButtonOnClicked();
 };

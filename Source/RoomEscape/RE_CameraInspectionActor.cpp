@@ -38,9 +38,9 @@ void ARE_CameraInspectionActor::ClearInteractionSetting()
 
 void ARE_CameraInspectionActor::SetChildActorClassFromPath(int32 ItemNum)
 {
-	FString GameItemPath = "Blueprint'" + GameItemSoftObjectPath[2].GetAssetPathString() + "_C'";
+	/*FString GameItemPath = "Blueprint'" + GameItemSoftObjectPath[2].GetAssetPathString() + "_C'";
 	UClass* GameItemClass = LoadClass<ARE_GameItemToSlot>(this, *GameItemPath);
-	SpawnItem->LoadedFromAnotherClass(GameItemClass->GetFName());
+	SpawnItem->LoadedFromAnotherClass(GameItemClass->GetFName());*/
 
 }
 void ARE_CameraInspectionActor::ItemSlotOnClikced(int32 ItemNum)

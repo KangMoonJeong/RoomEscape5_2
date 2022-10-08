@@ -1,11 +1,10 @@
 #include "RE_CombineWidget.h"
-#include "Components\GridPanel.h"
-#include "Components\GridSlot.h"
 #include "RE_GameInstance.h"
 #include "RE_CombineItemSlot.h"
 #include "ItemSlot.h"
 #include "FP_FirstPerson\FP_FirstPersonCharacter.h"
 #include "RE_PlayerController.h"
+#include "Components\UniformGridPanel.h"
 
 
 bool URE_CombineWidget::Initialize()
@@ -15,7 +14,6 @@ bool URE_CombineWidget::Initialize()
 
 	FirstCombineItemSlot->SetParentWidget(this);
 	SecondCombineItemSlot->SetParentWidget(this);
-
 
 	return true;
 }
@@ -45,11 +43,13 @@ void URE_CombineWidget::InitializeItemSlot_GridPanel()
 
 	for (int32 i = 0; i < NoLimitItemSlotArray.Num(); i++)
 	{
-		if (!NoLimitItemSlotArray.IsValidIndex(i))
+		if (!NoLimitItemSlotArray[i]->IsValidLowLevel())
 			continue;
 
-		UGridSlot* GridSlot = ItemSlot_GridPanel->AddChildToGrid(NoLimitItemSlotArray[i], Row, Column++);
-		GridSlot->SetPadding(FMargin(20.f));
+		UWidget* ItemSlot = NoLimitItemSlotArray[i];
+		ItemSlot_UniformGridPanel->AddChildToUniformGrid(ItemSlot, Row, Column);
+
+		Column++;
 		if (Column == 8)
 		{
 			Row++;
@@ -80,9 +80,9 @@ void URE_CombineWidget::AddItemSlot_GridPanel()
 	TArray<class UItemSlot*> NoLimitItemSlotArray;
 	NoLimitItemSlotArray = RE_GameInstance->GetNoLimitItemSlotArray();
 
-	
-	UGridSlot* GridSlot = ItemSlot_GridPanel->AddChildToGrid(NoLimitItemSlotArray[NoLimitItemSlotArray.Num() - 1], Row, Column++);
-	GridSlot->SetPadding(FMargin(20.f));
+
+	ItemSlot_UniformGridPanel->AddChildToUniformGrid(NoLimitItemSlotArray[NoLimitItemSlotArray.Num() - 1], Row, Column++);
+	//GridSlot->SetPadding(FMargin(20.f));
 	if (Column == 8)
 	{
 		Row++;
@@ -146,7 +146,7 @@ void URE_CombineWidget::InspectionAddStatus()
 
 void URE_CombineWidget::ReLocationItemSlot_GridPanel()
 {
-	ItemSlot_GridPanel->ClearChildren();
+	ItemSlot_UniformGridPanel->ClearChildren();
 	InitializeItemSlot_GridPanel();
 }
 
