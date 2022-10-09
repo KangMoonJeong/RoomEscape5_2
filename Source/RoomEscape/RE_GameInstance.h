@@ -175,4 +175,8 @@ private:
 public:
 	void SetLoveCount(int32 SetLoveCount);
 	int32 GetLoveCount();
+
+
+	bool bLastIndex = false;
+	
 };

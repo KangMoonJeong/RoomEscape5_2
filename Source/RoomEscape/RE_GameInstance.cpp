@@ -81,7 +81,10 @@ void URE_GameInstance::SetCurrentQuestElement()
 bool URE_GameInstance::SetNextQuest(int32 AddIndex)
 {
 	if (CurrentChapterIndex == MaxChapterIndex && CurrentQuestIndex == MaxQuestIndex)
+	{
+		bLastIndex = true;
 		return false;
+	}
 
 
 	CurrentQuestIndex += AddIndex;

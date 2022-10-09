@@ -28,7 +28,7 @@ void URE_DialogueWidget::RemoveWidget()
 
 }
 
-void URE_DialogueWidget::InitializeProperties(FString FileName, int32 SetLoveCount)
+void URE_DialogueWidget::InitializeProperties(FString FileName, int32 SetLoveCount, bool SetLastIndex)
 {
 	if (*FileName == FString(""))
 		return;
