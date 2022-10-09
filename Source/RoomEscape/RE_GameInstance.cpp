@@ -81,10 +81,7 @@ void URE_GameInstance::SetCurrentQuestElement()
 bool URE_GameInstance::SetNextQuest(int32 AddIndex)
 {
 	if (CurrentChapterIndex == MaxChapterIndex && CurrentQuestIndex == MaxQuestIndex)
-	{
-		bLastIndex = true;
 		return false;
-	}
 
 
 	CurrentQuestIndex += AddIndex;
@@ -94,9 +91,16 @@ bool URE_GameInstance::SetNextQuest(int32 AddIndex)
 		CurrentChapterIndex++;
 		CurrentQuestIndex = 0;
 	}
-	
-	CurrentQuest = Chapter[CurrentChapterIndex].Quest[CurrentQuestIndex];
 
+
+	if (CurrentChapterIndex == MaxChapterIndex && CurrentQuestIndex == MaxQuestIndex)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("if (CurrentChapterIndex == MaxChapterIndex && CurrentQuestIndex == MaxQuestIndex)"))
+		bLastIndex = true;
+	}
+
+
+	CurrentQuest = Chapter[CurrentChapterIndex].Quest[CurrentQuestIndex];
 
 	SetCurrentQuestElement();
 
@@ -113,7 +117,7 @@ void URE_GameInstance::OpenDialogueWidget()
 	
 
 	RE_PlayerController->OnCurrentWidgetOffHUD(DialogueWidget, EInputMode::EIM_UIOnly);
-	DialogueWidget->InitializeProperties(CurrentQuest.DialogueFileName, LoveCount);
+	DialogueWidget->InitializeProperties(CurrentQuest.DialogueFileName, LoveCount, bLastIndex);
 }
 
 

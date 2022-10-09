@@ -77,4 +77,32 @@ public:
 	void InitializeData(int32 SetResultLoveCount);
 	int32 LoveCount;
 
+
+
+
+	///
+	bool bLastIndex = false;
+	void SetLastIndexLow();
+
+	UPROPERTY(EditAnywhere)
+	int32 GoodEnding1LoveCount;
+
+	UPROPERTY(EditAnywhere)
+	int32 GoodEnding1Low;
+
+	UPROPERTY(EditAnywhere)
+	int32 BadEnding1LoveCount;
+
+	UPROPERTY(EditAnywhere)
+	int32 BadEnding1Low;
+
+	UPROPERTY(EditAnywhere)
+	int32 BadEnding2LoveCount;
+
+	UPROPERTY(EditAnywhere)
+	int32 BadEnding2Low;
+
+
+	UPROPERTY(EditAnywhere)
+	FName MapName;
 };

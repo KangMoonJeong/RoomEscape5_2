@@ -7,6 +7,7 @@
 #include "RE_Dialogue_Selection.h"
 #include "RE_GameInstance.h"
 #include "Components\Button.h"
+#include "Kismet/GamePlayStatics.h"
 
 
 
@@ -20,11 +21,19 @@ void URE_DialogueWidget::RemoveWidget()
 	if (!RE_PlayerController && !GameInstance)
 		return;
 
-	CurrentRowNum = 0;
-	
-	RE_PlayerController->OnHUDOffCurrentWidget();
 
+	CurrentRowNum = 0;
+	RE_PlayerController->OnHUDOffCurrentWidget();
 	GameInstance->SetLoveCount(LoveCount);
+	
+	
+	if (bLastIndex == true)
+	{
+		RE_PlayerController->DeleteGameData();
+		this->RemoveFromViewport();
+		UGameplayStatics::OpenLevel(GetWorld(), MapName, true);
+		return;
+	}
 
 }
 
@@ -46,12 +55,19 @@ void URE_DialogueWidget::InitializeProperties(FString FileName, int32 SetLoveCou
 	HasNextDialogue = true;
 	bIsFocusable = true;
 	SetKeyboardFocus();
+	
+	if (SetLastIndex == true)
+	{
+		SetLastIndexLow();
+	}
 
 	InspectNextDialogue();
 	SetCurrentlyRow();
 
 
 	LoveCount = SetLoveCount;
+	bLastIndex = SetLastIndex;
+
 }
 
 
@@ -61,6 +77,22 @@ void URE_DialogueWidget::InitializeProperties(FString FileName, int32 SetLoveCou
 void URE_DialogueWidget::InitializeData(int32 SetResultLoveCount)
 {
 	LoveCount = SetResultLoveCount;
+}
+
+void URE_DialogueWidget::SetLastIndexLow()
+{
+	if (LoveCount >= GoodEnding1LoveCount)
+	{
+		CurrentRowNum = GoodEnding1Low;
+	}
+	else if (LoveCount >= BadEnding1LoveCount)
+	{
+		CurrentRowNum = BadEnding1Low;
+	}
+	else if (LoveCount >= BadEnding2LoveCount)
+	{
+		CurrentRowNum = BadEnding2Low;
+	}
 }
 
 int32 URE_DialogueWidget::GetLoveCount()
