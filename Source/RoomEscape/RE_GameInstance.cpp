@@ -22,6 +22,7 @@ void URE_GameInstance::InitializeQuestProperties(TArray<FChapter> SetChapter, in
 		CurrentQuestIndex = SetQuestIndex;
 		CurrentQuest = Chapter[0].Quest[0];
 		LoveCount = 10;
+		bLastIndex = false;
 		return;
 	}
 	else
