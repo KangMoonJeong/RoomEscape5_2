@@ -285,7 +285,7 @@ void ARE_PlayerController::InitializeGameData()
 
 
 	/* Quest */
-	RE_GameInstance->InitializeQuestProperties(SaveGame->Chapter, SaveGame->CurrentChpaterIndex, SaveGame->CurrentQuestIndex);
+	RE_GameInstance->InitializeQuestProperties(SaveGame->Chapter, SaveGame->LoveCount, SaveGame->CurrentChpaterIndex, SaveGame->CurrentQuestIndex);
 }
 
 void ARE_PlayerController::SaveGameData()

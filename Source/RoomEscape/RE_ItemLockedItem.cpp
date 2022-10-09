@@ -115,17 +115,13 @@ void ARE_ItemLockedItem::LeftDoorRotation(float Value)
 	{
 		if (bSlide)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("bRight, bSlide"))
 			RightDoor->SetRelativeLocation(FVector(Value, 0, 0));
 		}
 		else
 		{
-			UE_LOG(LogTemp, Warning, TEXT("bRight, No bSlide"))
 			RightDoor->SetRelativeRotation(FRotator(0, Value, 0)); // 180
 		}
 	}
-	//if (bRightDoor)
-	//	RightDoor->SetRelativeRotation(FRotator(0, Value, 0)); // 180
 }
 
 void ARE_ItemLockedItem::RightDoorRotation(float Value)
@@ -134,19 +130,13 @@ void ARE_ItemLockedItem::RightDoorRotation(float Value)
 	{
 		if (bSlide)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("bLeft, bSlide"))
 			LeftDoor->SetRelativeLocation(FVector(Value, 0, 0));
 		}
 		else
 		{
-			UE_LOG(LogTemp, Warning, TEXT("bLeft, No bSlide"))
 			LeftDoor->SetRelativeRotation(FRotator(0, Value, 0)); // 0
 		}
-
 	}
-
-	//if (bLeftDoor)
-	//	LeftDoor->SetRelativeRotation(FRotator(0, Value, 0)); // 0
 }
 
 void ARE_ItemLockedItem::TimeLineFinish()
