@@ -192,7 +192,7 @@ void ARE_PlayerController::InitializeGameData()
 	if (!SaveGame)
 	{
 		OnCurrentWidgetOffHUD(DialogueWidget, EInputMode::EIM_UIOnly);
-		DialogueWidget->InitializeProperties("DataTable'/Game/707/Quest/Intro.Intro'");
+		DialogueWidget->InitializeProperties("DataTable'/Game/707/Quest/Intro_en.Intro_en'");
 		RE_GameInstance->InitializeQuestProperties({}, 0, 0);
 		RE_GameInstance->InitializeAllItemSlotData({}, {}, {}, {}, {}, {}, {}, {});
 

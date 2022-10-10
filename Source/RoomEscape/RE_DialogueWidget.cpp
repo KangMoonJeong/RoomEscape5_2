@@ -66,9 +66,6 @@ void URE_DialogueWidget::InitializeProperties(FString FileName, int32 SetLoveCou
 	
 	InspectNextDialogue();
 	SetCurrentlyRow();
-
-
-
 }
 
 
@@ -84,17 +81,14 @@ void URE_DialogueWidget::SetLastIndexLow()
 {
 	if (LoveCount >= GoodEnding1LoveCount)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("11111111111"))
 		CurrentRowNum = GoodEnding1Low;
 	}
 	else if (LoveCount >= BadEnding1LoveCount)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("2222222222222"))
 		CurrentRowNum = BadEnding1Low;
 	}
 	else if (LoveCount >= BadEnding2LoveCount)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("33333333333"))
 		CurrentRowNum = BadEnding2Low;
 	}
 }
