@@ -8,6 +8,8 @@
 #include "RE_GameInstance.h"
 #include "Components\Button.h"
 #include "Kismet/GamePlayStatics.h"
+#include "Animation\WidgetAnimation.h"
+
 
 
 
@@ -50,6 +52,7 @@ void URE_DialogueWidget::InitializeProperties(FString FileName, int32 SetLoveCou
 	BP_Dialogue_Selection->SelectionButton2->OnClicked.AddDynamic(this, &URE_DialogueWidget::SelectionButton2_OnClicked);
 
 
+	
 
 
 	HasNextDialogue = true;
@@ -93,6 +96,8 @@ void URE_DialogueWidget::SetLastIndexLow()
 	}
 }
 
+
+
 int32 URE_DialogueWidget::GetLoveCount()
 {
 	return LoveCount;
@@ -126,6 +131,9 @@ void URE_DialogueWidget::InspectNextDialogue()
 void URE_DialogueWidget::SetCurrentlyRow()
 {
 
+	SpecialEffects();
+	PlayShockAnimation();
+
 	Character_Image->SetBrushFromTexture(CharacterImageArray[(*DialogueRow).CharacterImage]);
 	CharacterName_Text->SetText((*DialogueRow).CharacterName);
 	Dialogue_Text->SetText((*DialogueRow).Dialogue);
@@ -134,6 +142,21 @@ void URE_DialogueWidget::SetCurrentlyRow()
 
 }
 
+
+void URE_DialogueWidget::PlayShockAnimation()
+{
+	UE_LOG(LogTemp, Warning, TEXT("URE_DialogueWidget::PlayShockAnimation(Shock1)"));
+
+	if ((*DialogueRow).Shock != 1)
+		return;
+	UE_LOG(LogTemp, Warning, TEXT("URE_DialogueWidget::PlayShockAnimation(Shock2)"));
+
+	if (Shock)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("URE_DialogueWidget::PlayShockAnimation(Shock3)"));
+		PlayAnimation(Shock);
+	}
+}
 
 
 

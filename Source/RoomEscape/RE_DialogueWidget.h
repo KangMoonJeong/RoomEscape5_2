@@ -9,6 +9,10 @@ class ROOMESCAPE_API URE_DialogueWidget : public UUserWidget
 {
 	GENERATED_BODY()
 
+public:
+
+	//virtual bool Initialize(); 
+
 
 
 protected:
@@ -94,7 +98,7 @@ public:
 	int32 BadEnding1LoveCount;
 
 	UPROPERTY(EditAnywhere)
-	int32 BadEnding1Low;
+		int32 BadEnding1Low;
 
 	UPROPERTY(EditAnywhere)
 	int32 BadEnding2LoveCount;
@@ -105,4 +109,18 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	FName MapName;
+
+
+
+	
+	//class USoundWave* MakingSound;
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+	void SpecialEffects();
+
+
+	void PlayShockAnimation();
+
+	UPROPERTY(meta = (BindWidgetAnim), Transient)
+	class UWidgetAnimation* Shock;
+
 };

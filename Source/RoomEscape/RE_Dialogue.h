@@ -44,4 +44,7 @@ public:
 	UPROPERTY()
 	int32 ResultLoveCount2;
 
+	UPROPERTY()
+	int32 Shock;
+
 };
