@@ -14,7 +14,7 @@ bool URE_LoungeWidget::Initialize()
 
 	New_Button->OnClicked.AddDynamic(this, &URE_LoungeWidget::New_ButtonOnClicked);
 	Storage_Button->OnClicked.AddDynamic(this, &URE_LoungeWidget::Storage_ButtonOnClicked);
-	Sound_Button->OnClicked.AddDynamic(this, &URE_LoungeWidget::Sound_ButtonOnClicked);
+	//Sound_Button->OnClicked.AddDynamic(this, &URE_LoungeWidget::Sound_ButtonOnClicked);
 	Exit_Button->OnClicked.AddDynamic(this, &URE_LoungeWidget::Exit_ButtonOnClicked);
 	NewYes_Button->OnClicked.AddDynamic(this, &URE_LoungeWidget::NewYes_ButtonOnClicked);
 	ExitYes_Button->OnClicked.AddDynamic(this, &URE_LoungeWidget::ExitYes_ButtonOnClicked);
@@ -38,10 +38,10 @@ void URE_LoungeWidget::Storage_ButtonOnClicked()
 	DetailContent_Switcher->SetActiveWidgetIndex(1);
 }
 
-void URE_LoungeWidget::Sound_ButtonOnClicked()
-{
-	DetailContent_Switcher->SetActiveWidgetIndex(2);
-}
+//void URE_LoungeWidget::Sound_ButtonOnClicked()
+//{
+//	DetailContent_Switcher->SetActiveWidgetIndex(2);
+//}
 
 void URE_LoungeWidget::Exit_ButtonOnClicked()
 {

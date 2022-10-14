@@ -19,8 +19,8 @@ protected:
 	UPROPERTY(meta = (BindWidget))
 	class UButton* Storage_Button;
 
-	UPROPERTY(meta = (BindWidget))
-	class UButton* Sound_Button;
+	/*UPROPERTY(meta = (BindWidget))
+	class UButton* Sound_Button;*/
 
 	UPROPERTY(meta = (BindWidget))
 	class UButton* Exit_Button;
