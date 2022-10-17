@@ -8,7 +8,7 @@ bool URE_LoungeSaveListWidget::Initialize()
 	if (Super::Initialize() == false)
 		return false;
 
-	X_Button->OnClicked.AddDynamic(this, &URE_LoungeSaveListWidget::X_ButtonOnClicked);
+	//X_Button->OnClicked.AddDynamic(this, &URE_LoungeSaveListWidget::X_ButtonOnClicked);
 
 	return true;
 }
@@ -34,8 +34,8 @@ void URE_LoungeSaveListWidget::SetSaveListUnitWidgetIndex(int32 Set)
 
 
 /* X_Button On Clicked Remove From Parent */
-void URE_LoungeSaveListWidget::X_ButtonOnClicked()
-{
-	RemoveFromParent();
-
-}
+//void URE_LoungeSaveListWidget::X_ButtonOnClicked()
+//{
+//	RemoveFromParent();
+//
+//}

@@ -175,6 +175,6 @@ void URE_CameraInspectionWidget::SetSpawnActorFromPath(int32 PathNum)
 TArray<UItemSlot*> URE_CameraInspectionWidget::UpdateItemSlotArray()
 {
 	URE_GameInstance* GameInstance = Cast<URE_GameInstance>(GetWorld()->GetGameInstance());
-	return GameInstance->GetNoLimitItemSlotArray();
+		return GameInstance->GetNoLimitItemSlotArray();
 }
 

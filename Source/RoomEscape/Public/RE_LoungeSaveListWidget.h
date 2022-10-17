@@ -47,12 +47,12 @@ public:
 
 
 	/* X_Button On Clicked Remove From Parent */
-protected:
-	UPROPERTY(meta = (BindWidget))
-		class UButton* X_Button;
-
-
-protected:
-	UFUNCTION()
-		void X_ButtonOnClicked();
+//protected:
+//	UPROPERTY(meta = (BindWidget))
+//		class UButton* X_Button;
+//
+//
+//protected:
+//	UFUNCTION()
+//		void X_ButtonOnClicked();
 };

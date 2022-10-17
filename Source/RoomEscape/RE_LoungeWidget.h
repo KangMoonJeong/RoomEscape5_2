@@ -32,7 +32,16 @@ protected:
 	class UButton* NewYes_Button;
 
 	UPROPERTY(meta = (BindWidget))
+	class UButton* NewNo_Button;
+
+	UPROPERTY(meta = (BindWidget))
 	class UButton* ExitYes_Button;
+
+	UPROPERTY(meta = (BindWidget))
+	class UButton* ExitNo_Button;
+
+	UPROPERTY(meta = (BindWidget))
+	class UButton* StorageNo_Button;
 
 	UFUNCTION()
 	void New_ButtonOnClicked();
@@ -40,8 +49,8 @@ protected:
 	UFUNCTION()
 	void Storage_ButtonOnClicked();
 
-	UFUNCTION()
-	void Sound_ButtonOnClicked();
+	/*UFUNCTION()
+	void Sound_ButtonOnClicked();*/
 
 	UFUNCTION()
 	void Exit_ButtonOnClicked();
@@ -50,8 +59,33 @@ protected:
 	void NewYes_ButtonOnClicked();
 
 	UFUNCTION()
+	void NewNo_ButtonOnClicked();
+
+	UFUNCTION()
 	void ExitYes_ButtonOnClicked();
+
+	UFUNCTION()
+	void ExitNo_ButtonOnClicked();
+
+	UFUNCTION()
+	void StorageNo_ButtonOnClicked();
+
 
 	UPROPERTY(EditAnywhere, Category = "707")
 	FName MapName;
+
+
+
+
+	UPROPERTY(EditAnywhere, Category = "707")
+	int32 SettingWidgetIndex;
+
+	UPROPERTY(EditAnywhere, Category = "707")
+	int32 NewWidgetIndex;
+
+	UPROPERTY(EditAnywhere, Category = "707")
+	int32 StorageWidgetIndex;
+
+	UPROPERTY(EditAnywhere, Category = "707")
+	int32 ExitWidgetIndex;
 };

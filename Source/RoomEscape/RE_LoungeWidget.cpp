@@ -17,7 +17,11 @@ bool URE_LoungeWidget::Initialize()
 	//Sound_Button->OnClicked.AddDynamic(this, &URE_LoungeWidget::Sound_ButtonOnClicked);
 	Exit_Button->OnClicked.AddDynamic(this, &URE_LoungeWidget::Exit_ButtonOnClicked);
 	NewYes_Button->OnClicked.AddDynamic(this, &URE_LoungeWidget::NewYes_ButtonOnClicked);
+	NewNo_Button->OnClicked.AddDynamic(this, &URE_LoungeWidget::NewNo_ButtonOnClicked);
 	ExitYes_Button->OnClicked.AddDynamic(this, &URE_LoungeWidget::ExitYes_ButtonOnClicked);
+	ExitNo_Button->OnClicked.AddDynamic(this, &URE_LoungeWidget::ExitNo_ButtonOnClicked);
+	StorageNo_Button->OnClicked.AddDynamic(this, &URE_LoungeWidget::StorageNo_ButtonOnClicked);
+
 
 	return true;
 }
@@ -30,22 +34,18 @@ bool URE_LoungeWidget::Initialize()
 /* DetailContent_Switcher */
 void URE_LoungeWidget::New_ButtonOnClicked()
 {
-	DetailContent_Switcher->SetActiveWidgetIndex(0);
+	DetailContent_Switcher->SetActiveWidgetIndex(NewWidgetIndex);
 }
 
 void URE_LoungeWidget::Storage_ButtonOnClicked()
 {
-	DetailContent_Switcher->SetActiveWidgetIndex(1);
+	DetailContent_Switcher->SetActiveWidgetIndex(StorageWidgetIndex);
 }
 
-//void URE_LoungeWidget::Sound_ButtonOnClicked()
-//{
-//	DetailContent_Switcher->SetActiveWidgetIndex(2);
-//}
 
 void URE_LoungeWidget::Exit_ButtonOnClicked()
 {
-	DetailContent_Switcher->SetActiveWidgetIndex(3);
+	DetailContent_Switcher->SetActiveWidgetIndex(ExitWidgetIndex);
 }
 
 
@@ -64,7 +64,24 @@ void URE_LoungeWidget::NewYes_ButtonOnClicked()
 	UGameplayStatics::OpenLevel(GetWorld(), MapName, true);
 }
 
+void URE_LoungeWidget::NewNo_ButtonOnClicked()
+{
+	DetailContent_Switcher->SetActiveWidgetIndex(SettingWidgetIndex);
+}
+
 void URE_LoungeWidget::ExitYes_ButtonOnClicked()
 {
 	UKismetSystemLibrary::QuitGame(GetWorld(), UUserWidget::GetOwningPlayer(), EQuitPreference::Quit, false);
+}
+
+void URE_LoungeWidget::ExitNo_ButtonOnClicked()
+{
+	DetailContent_Switcher->SetActiveWidgetIndex(SettingWidgetIndex);
+
+}
+
+void URE_LoungeWidget::StorageNo_ButtonOnClicked()
+{
+	DetailContent_Switcher->SetActiveWidgetIndex(SettingWidgetIndex);
+
 }
