@@ -75,6 +75,7 @@ void ARE_ItemInspection::SetChildActorClassFromPath(int32 ItemNum)
 	/*if (DestroyedArray.Contains(SpawnActor->GetAddObjectItemNum()))
 		SpawnActor->DestroyAddObject();*/
 
+
 }
 
 

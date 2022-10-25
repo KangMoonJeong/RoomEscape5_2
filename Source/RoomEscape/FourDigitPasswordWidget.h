@@ -127,4 +127,8 @@ public:
 	class ARE_PasswordLockedItem* OwnerLockedItem;
 
 	void SetLockedItem(class ARE_PasswordLockedItem* SetItem);
+
+
+	UPROPERTY(EditAnywhere)
+	bool OnlyVisibleWidget = false;
 };

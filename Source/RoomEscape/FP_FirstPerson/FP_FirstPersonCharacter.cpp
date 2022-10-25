@@ -13,6 +13,9 @@
 #include "RoomEscape\RE_PlayerController.h"
 #include "RoomEscape\RE_WholeWidget.h"
 #include "RoomEscape/RE_GameInstance.h"
+#include "RoomEscape/Public/RE_PhonePassword.h"
+#include "RoomEscape\Public\RE_PhoneWidget.h"
+
 
 
 
@@ -284,7 +287,11 @@ void AFP_FirstPersonCharacter::QuitGame()
 
 void AFP_FirstPersonCharacter::ToggleTemp()
 {
-	UE_LOG(LogTemp, Warning, TEXT("ToggleTemp() :%d"), 2);
+
+	PressedItemSlotLocation = -1;
+	URE_PhoneWidget* RE_PhoneWidget = CreateWidget<URE_PhoneWidget>(GetWorld(), RE_PhoneWidgetClass);
+	PlayerController->OnCurrentWidgetOffHUD(RE_PhoneWidget, EInputMode::EIM_UIOnly);
+	PlayerController->ReleaseSlotLocation();
 }
 
 void AFP_FirstPersonCharacter::RelocationGridPanel()

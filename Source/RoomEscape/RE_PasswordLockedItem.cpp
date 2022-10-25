@@ -4,6 +4,8 @@
 #include "Components/BoxComponent.h"
 #include "GameFramework\Character.h"
 #include "RE_GameInstance.h"
+#include "RoomEscape\Public\VIsiblePasswordWidget.h"
+
 
 
 ARE_PasswordLockedItem::ARE_PasswordLockedItem()
@@ -62,6 +64,10 @@ void ARE_PasswordLockedItem::Interact()
 		FourDigitPasswordWidget = CreateWidget<UFourDigitPasswordWidget>(GetWorld(), FourDigitPasswordWidgetClass);
 		FourDigitPasswordWidget->SetLockedItem(this);
 	}
+	else if (bVisiblePassword)
+	{
+		VisiblePasswordWidget = CreateWidget<UVIsiblePasswordWidget>(GetWorld(), VisiblePasswordWidgetClass);
+	}
 }
 
 void ARE_PasswordLockedItem::SolevedItem()
@@ -69,6 +75,7 @@ void ARE_PasswordLockedItem::SolevedItem()
 	bEverSolveLock = true;
 	URE_GameInstance* GameInstance = Cast<URE_GameInstance>(GetWorld()->GetGameInstance());
 	GameInstance->AddSolvedQuestMapElement(ItemNum);
+	Door->DestroyComponent();
 }
 
 int32 ARE_PasswordLockedItem::GetItemNum()

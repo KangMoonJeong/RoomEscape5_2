@@ -173,7 +173,7 @@ void URE_GameInstance::SetUnLockedActorNumToCurrentQuest(int32 ChapterIndex, int
 	}
 }
 
-void URE_GameInstance::GetUnLockedActorNum(int32 ChpaterIndex, int32 QuestIndex, int32 UnLockedActor)
+void URE_GameInstance::GetUnLockedActorNum(int32 ChpaterIndex, int32 QuestIndex, int32 UnLockedActor, UUserWidget* TelegramWidget)
 {
 	SetUnLockedActorNumToChapter(ChpaterIndex, QuestIndex, UnLockedActor);
 	SetUnLockedActorNumToCurrentQuest(ChpaterIndex, QuestIndex, UnLockedActor);
@@ -184,7 +184,15 @@ void URE_GameInstance::GetUnLockedActorNum(int32 ChpaterIndex, int32 QuestIndex,
 	if (!SetNextQuest(1))
 		return;
 
+	if(!TelegramWidget)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("if(!TelegramWidget)"));
+		ARE_PlayerController* RE_PlayerController = Cast<ARE_PlayerController>(GetWorld()->GetFirstPlayerController());
+		if (!RE_PlayerController)
+			return;
+		RE_PlayerController->OnHUDOffCurrentWidget();
 
+	}
 	OpenDialogueWidget();
 }
 
@@ -232,7 +240,16 @@ int32 URE_GameInstance::GetTenLimitItemSlotArrayNum()
 
 int32 URE_GameInstance::GetSelectedItemSlotNum(int32 SelectedIndex)
 {
-	return TenLimitItemSlotArray[SelectedIndex]->GetItemNum();
+	if (TenLimitItemSlotArray[SelectedIndex]->GetItemNum())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("TenLimitItemSlotArray[SelectedIndex]->GetItemNum() : %d"), TenLimitItemSlotArray[SelectedIndex]->GetItemNum())
+		return TenLimitItemSlotArray[SelectedIndex]->GetItemNum();
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("!!!!!!!!!!!!!!!!TenLimitItemSlotArray[SelectedIndex]->GetItemNum() : %d"), TenLimitItemSlotArray[SelectedIndex]->GetItemNum())
+		return -1;
+	}
 }
 
 TArray<UItemSlot*> URE_GameInstance::GetTenLimitItemSlotArray()
@@ -386,7 +403,10 @@ void URE_GameInstance::AddSolvedQuestMapElement(int32 AddNum)
 	UE_LOG(LogTemp, Warning, TEXT("AddNum : %d"), AddNum);
 }
 
-
+bool URE_GameInstance::CheckContainSolvedQuestMap(int32 ItemNum)
+{
+	return SolvedQuestMap.Contains(ItemNum);
+}
 
 
 
@@ -549,3 +569,5 @@ int32 URE_GameInstance::GetLoveCount()
 {
 	return LoveCount;
 }
+
+

@@ -75,5 +75,12 @@ public:
 	void SolevedItem() override;
 	int32 GetItemNum() override;
 
+	UPROPERTY(EditAnywhere)
+	bool bVisiblePassword;
 
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UUserWidget> VisiblePasswordWidgetClass;
+
+	UPROPERTY()
+	class UVIsiblePasswordWidget* VisiblePasswordWidget;
 };

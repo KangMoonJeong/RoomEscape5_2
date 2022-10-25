@@ -133,5 +133,10 @@ public:
 
 
 	void SetIntemInspectionPath(int32 PathNum);
+
+
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UUserWidget> RE_PhoneWidgetClass;
 };
 

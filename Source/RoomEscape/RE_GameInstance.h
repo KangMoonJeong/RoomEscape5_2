@@ -89,9 +89,9 @@ private:
 	void SetUnLockedActorNumToChapter(int32 ChpaterIndex, int32 QuestIndex, int32 UnLockedActor);
 	void SetUnLockedActorNumToCurrentQuest(int32 ChapterIndex, int32 QuestIndex, int32 UnLockedActor);
 public:
-	void GetUnLockedActorNum(int32 ChpaterIndex, int32 QuestIndex, int32 UnLockedActor);
+	void GetUnLockedActorNum(int32 ChpaterIndex, int32 QuestIndex, int32 UnLockedActor, UUserWidget* TelegramWidget = nullptr);
 
-
+	
 
 
 
@@ -178,5 +178,8 @@ public:
 
 
 	bool bLastIndex = false;
+
+
+	bool CheckContainSolvedQuestMap(int32 ItemNum);
 	
 };
