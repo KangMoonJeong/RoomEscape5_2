@@ -48,4 +48,9 @@ protected:
 	void LoadOnClicked();
 
 
+	UPROPERTY(meta = (BindWidget))
+	class UButton* Exit_Button;
+
+	UFUNCTION()
+	void Exit_ButtonOnClicked();
 };

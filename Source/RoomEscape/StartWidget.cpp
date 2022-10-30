@@ -3,6 +3,7 @@
 #include "Kismet/GamePlayStatics.h"
 #include "RE_PlayerController.h"
 #include "SaveListWidget.h"
+#include "Kismet\KismetSystemLibrary.h"
 
 
 bool UStartWidget::Initialize()
@@ -14,7 +15,7 @@ bool UStartWidget::Initialize()
 
 	NewGame_Button->OnClicked.AddDynamic(this, &UStartWidget::NewGameOnClicked);
 	Load_Button->OnClicked.AddDynamic(this, &UStartWidget::LoadOnClicked);
-	
+	Exit_Button->OnClicked.AddDynamic(this, &UStartWidget::Exit_ButtonOnClicked);
 
 	return true;
 }
@@ -48,6 +49,11 @@ void UStartWidget::LoadOnClicked()
 	SaveListWidget = CreateWidget<USaveListWidget>(this, SaveListWidgetClass);
 	SaveListWidget->SetSaveListUnitWidgetIndex(1);
 	SaveListWidget->AddToViewport();
+}
+
+void UStartWidget::Exit_ButtonOnClicked()
+{
+	UKismetSystemLibrary::QuitGame(GetWorld(), UUserWidget::GetOwningPlayer(), EQuitPreference::Quit, false);
 }
 
 
