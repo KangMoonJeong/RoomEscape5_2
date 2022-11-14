@@ -72,4 +72,10 @@ protected:
 	void MoveRight(float Value);
 	void ZoomIn();
 	void ZoomOut();
+
+
+
+private:
+	UPROPERTY(EditAnywhere)
+	TArray<FString> ItemPaths;
 };

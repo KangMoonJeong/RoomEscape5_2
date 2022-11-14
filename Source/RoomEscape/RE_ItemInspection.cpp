@@ -65,8 +65,9 @@ void ARE_ItemInspection::SetChildActorClassFromPath(int32 ItemNum)
 		SpawnActor->Destroy();
 		SpawnActor = nullptr;
 	}
-	FString GameItemPath = "Blueprint'" + GameItemSoftObjectPath[ItemNum].GetAssetPathString() + "_C'";
-	UClass* GameItemClass = LoadClass<ARE_GameItemToSlot>(this, *GameItemPath);
+	//FString GameItemPath = "Blueprint'" + GameItemSoftObjectPath[ItemNum].GetAssetPathString() + "_C'";
+	//UE_LOG(LogTemp, Warning, TEXT("GameItemPath : %s"), *GameItemPath);
+	UClass* GameItemClass = LoadClass<ARE_GameItemToSlot>(this, *ItemPaths[ItemNum]);
 	SpawnActor = GetWorld()->SpawnActor<ARE_GameItemToSlot>(GameItemClass, StartLocation, FRotator(0.f));
 	MoveForwardZoom = 0.f;
 	CurrentLocation = StartLocation;
