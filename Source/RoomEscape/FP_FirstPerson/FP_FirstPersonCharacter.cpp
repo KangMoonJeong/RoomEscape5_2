@@ -282,11 +282,13 @@ int32 AFP_FirstPersonCharacter::GetPressedItemSlotLocation()
 
 void AFP_FirstPersonCharacter::QuitGame()
 {
+	UE_LOG(LogTemp, Warning, TEXT("AFP_FirstPersonCharacter::QuitGame()"))
 	UKismetSystemLibrary::QuitGame(GetWorld(), PlayerController, EQuitPreference::Quit, false);
 }
 
 void AFP_FirstPersonCharacter::ToggleTemp()
 {
+	UE_LOG(LogTemp, Warning, TEXT("AFP_FirstPersonCharacter::ToggleTemp()"))
 
 	PressedItemSlotLocation = -1;
 	URE_PhoneWidget* RE_PhoneWidget = CreateWidget<URE_PhoneWidget>(GetWorld(), RE_PhoneWidgetClass);

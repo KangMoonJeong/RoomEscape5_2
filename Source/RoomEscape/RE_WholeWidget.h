@@ -21,8 +21,8 @@ protected:
 	UPROPERTY(meta = (BindWidget))
 	class UButton* Inventory_Button;
 
-	/*UPROPERTY(meta = (BindWidget))
-	class UButton* Inspection_Button;*/
+	UPROPERTY(meta = (BindWidget))
+	class UButton* Inspection_Button;
 	
 	UPROPERTY(meta = (BindWidget))
 	class UButton* Combine_Button;
@@ -56,8 +56,8 @@ protected:
 	UFUNCTION()
 	void Inventory_ButtonOnClicked();
 
-	/*UFUNCTION()
-	void Inspection_ButtonOnClicked();*/
+	UFUNCTION()
+	void Inspection_ButtonOnClicked();
 
 	UFUNCTION()
 	void Combine_ButtonOnClicked();

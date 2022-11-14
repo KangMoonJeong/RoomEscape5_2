@@ -21,7 +21,7 @@ bool URE_WholeWidget::Initialize()
 
 	Lounge_Button->OnClicked.AddDynamic(this, &URE_WholeWidget::Lounge_ButtonOnClicked);
 	Inventory_Button->OnClicked.AddDynamic(this, &URE_WholeWidget::Inventory_ButtonOnClicked);
-	//Inspection_Button->OnClicked.AddDynamic(this, &URE_WholeWidget::Inspection_ButtonOnClicked);
+	Inspection_Button->OnClicked.AddDynamic(this, &URE_WholeWidget::Inspection_ButtonOnClicked);
 	Combine_Button->OnClicked.AddDynamic(this, &URE_WholeWidget::Combine_ButtonOnClicked);
 
 	X_Button->OnClicked.AddDynamic(this, &URE_WholeWidget::X_ButtonOnClicked);
@@ -73,25 +73,25 @@ void URE_WholeWidget::Inventory_ButtonOnClicked()
 
 }
 
-//void URE_WholeWidget::Inspection_ButtonOnClicked()
-//{
-//	//if (CurrentWidget == BP_CameraInspectionWidget)
-//	//	return;
-//
-//	//CurrentWidget = BP_CameraInspectionWidget;
-//	//Content_WidgetSwitcher->SetActiveWidgetIndex(2);
-//
-//	//if (FirstItemInspectionWidgetOpen)
-//	//{
-//	//	BP_CameraInspectionWidget->InitialSetting();
-//	//	FirstItemInspectionWidgetOpen = false;
-//	//}
-//	//else
-//	//{
-//	//	BP_CameraInspectionWidget->ReLocationItemSlot_GridPanel();
-//	//}
-//
-//}
+void URE_WholeWidget::Inspection_ButtonOnClicked()
+{
+	if (CurrentWidget == BP_CameraInspectionWidget)
+		return;
+
+	CurrentWidget = BP_CameraInspectionWidget;
+	Content_WidgetSwitcher->SetActiveWidgetIndex(2);
+
+	if (FirstItemInspectionWidgetOpen)
+	{
+		BP_CameraInspectionWidget->InitialSetting();
+		FirstItemInspectionWidgetOpen = false;
+	}
+	else
+	{
+		BP_CameraInspectionWidget->ReLocationItemSlot_GridPanel();
+	}
+
+}
 
 void URE_WholeWidget::Combine_ButtonOnClicked()
 {
