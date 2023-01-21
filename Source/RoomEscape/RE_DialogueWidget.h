@@ -35,6 +35,8 @@ protected:
 
 private:
 	class ARE_Chapter* RE_Chapter;
+
+	UPROPERTY()
 	class UDataTable* TestDataTable;
 	int32 CurrentRowNum = 1;
 

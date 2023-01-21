@@ -46,18 +46,16 @@ void URE_Telegram::Password_EditableText_One_Commit(const FText& InText, ETextCo
 	if (UKismetTextLibrary::EqualEqual_TextText(Password_EditableText_One->GetText(), Password_One))
 	{
 		URE_GameInstance* GameInstance = Cast<URE_GameInstance>(GetWorld()->GetGameInstance());
-		if (GameInstance->CheckContainSolvedQuestMap(ItemNum_One))
-		{
+		//if (GameInstance->CheckContainSolvedQuestMap(ItemNum_One))
+		//{
 			ContentWidgetSwitcher->SetActiveWidgetIndex(2);
-			UE_LOG(LogTemp, Warning, TEXT("if (GameInstance->CheckContainSolvedQuestMap(ItemNum_One))"))
-		}
-		else
-		{
+		//}
+		//else
+		//{
 			ContentWidgetSwitcher->SetActiveWidgetIndex(2);
-			GameInstance->AddSolvedQuestMapElement(ItemNum_One);
-			GameInstance->GetUnLockedActorNum(Chapter_One, Quest_One, LockNum_One);
-			UE_LOG(LogTemp, Warning, TEXT("!!!!!!!!! if (GameInstance->CheckContainSolvedQuestMap(ItemNum_One))"))
-		}
+			//GameInstance->AddSolvedQuestMapElement(ItemNum_One);
+			//GameInstance->GetUnLockedActorNum(Chapter_One, Quest_One, LockNum_One);
+		//}
 	}
 	else
 	{
@@ -82,8 +80,8 @@ void URE_Telegram::Password_EditableText_Two_Commit(const FText& InText, ETextCo
 		else
 		{
 			ContentWidgetSwitcher->SetActiveWidgetIndex(4);
-			GameInstance->AddSolvedQuestMapElement(ItemNum_Two);
-			GameInstance->GetUnLockedActorNum(Chapter_Two, Quest_Two, LockNum_Two);
+		//	GameInstance->AddSolvedQuestMapElement(ItemNum_Two);
+			//GameInstance->GetUnLockedActorNum(Chapter_Two, Quest_Two, LockNum_Two);
 		}
 	}
 	else
@@ -109,8 +107,8 @@ void URE_Telegram::Password_EditableText_Three_Commit(const FText& InText, EText
 		else
 		{
 			ContentWidgetSwitcher->SetActiveWidgetIndex(6);
-			GameInstance->AddSolvedQuestMapElement(ItemNum_Three);
-			GameInstance->GetUnLockedActorNum(Chapter_Three, Quest_Three, LockNum_Three);
+			//GameInstance->AddSolvedQuestMapElement(ItemNum_Three);
+			//GameInstance->GetUnLockedActorNum(Chapter_Three, Quest_Three, LockNum_Three);
 		}
 	}
 	else
@@ -211,7 +209,19 @@ void URE_Telegram::Previousbutton_One_OnClicked()
 
 void URE_Telegram::Previousbutton_Two_OnClicked()
 {
-	ContentWidgetSwitcher->SetActiveWidgetIndex(1);
+	//ContentWidgetSwitcher->SetActiveWidgetIndex(1);
+
+	URE_GameInstance* GameInstance = Cast<URE_GameInstance>(GetWorld()->GetGameInstance());
+	if (GameInstance->CheckContainSolvedQuestMap(ItemNum_One))
+	{
+		ContentWidgetSwitcher->SetActiveWidgetIndex(1);
+	}
+	else
+	{
+		ContentWidgetSwitcher->SetActiveWidgetIndex(1);
+		GameInstance->AddSolvedQuestMapElement(ItemNum_One);
+		GameInstance->GetUnLockedActorNum(Chapter_One, Quest_One, LockNum_One);
+	}
 }
 
 void URE_Telegram::Previousbutton_Three_OnClicked()
@@ -221,7 +231,19 @@ void URE_Telegram::Previousbutton_Three_OnClicked()
 
 void URE_Telegram::Previousbutton_Four_OnClicked()
 {
-	ContentWidgetSwitcher->SetActiveWidgetIndex(1);
+	//ContentWidgetSwitcher->SetActiveWidgetIndex(1);
+
+	URE_GameInstance* GameInstance = Cast<URE_GameInstance>(GetWorld()->GetGameInstance());
+	if (GameInstance->CheckContainSolvedQuestMap(ItemNum_One))
+	{
+		ContentWidgetSwitcher->SetActiveWidgetIndex(3);
+	}
+	else
+	{
+		ContentWidgetSwitcher->SetActiveWidgetIndex(3);
+		GameInstance->AddSolvedQuestMapElement(ItemNum_Two);
+		GameInstance->GetUnLockedActorNum(Chapter_Two, Quest_Two, LockNum_Two);
+	}
 
 }
 
@@ -232,8 +254,18 @@ void URE_Telegram::Previousbutton_Five_OnClicked()
 
 void URE_Telegram::Previousbutton_Six_OnClicked()
 {
-	ContentWidgetSwitcher->SetActiveWidgetIndex(1);
-
+	//ContentWidgetSwitcher->SetActiveWidgetIndex(1);
+	URE_GameInstance* GameInstance = Cast<URE_GameInstance>(GetWorld()->GetGameInstance());
+	if (GameInstance->CheckContainSolvedQuestMap(ItemNum_One))
+	{
+		ContentWidgetSwitcher->SetActiveWidgetIndex(5);
+	}
+	else
+	{
+		ContentWidgetSwitcher->SetActiveWidgetIndex(5);
+		GameInstance->AddSolvedQuestMapElement(ItemNum_Three);
+		GameInstance->GetUnLockedActorNum(Chapter_Three, Quest_Three, LockNum_Three);
+	}
 }
 
 
