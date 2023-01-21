@@ -8,6 +8,8 @@
 #include "Kismet\KismetTextLibrary.h"
 #include "RoomEscape\RE_PlayerController.h"
 #include "RoomEscape\RE_GameInstance.h"
+#include "Kismet/GamePlayStatics.h"
+#include "RE_PhoneWidget.h"
 
 
 bool URE_Telegram::Initialize()
@@ -32,6 +34,8 @@ bool URE_Telegram::Initialize()
 	Password_EditableText_One->OnTextCommitted.AddDynamic(this, &URE_Telegram::Password_EditableText_One_Commit);
 	Password_EditableText_Two->OnTextCommitted.AddDynamic(this, &URE_Telegram::Password_EditableText_Two_Commit);
 	Password_EditableText_Three->OnTextCommitted.AddDynamic(this, &URE_Telegram::Password_EditableText_Three_Commit);
+
+	HomeButton->OnClicked.AddDynamic(this, &URE_Telegram::HomeButton_ButtonOnClicked);
 
 	return true;
 }
@@ -119,6 +123,7 @@ void URE_Telegram::Password_EditableText_Three_Commit(const FText& InText, EText
 	}
 
 }
+
 
 void URE_Telegram::Dialogue_Button_One_ButtonOnClicked()
 {
@@ -269,7 +274,20 @@ void URE_Telegram::Previousbutton_Six_OnClicked()
 }
 
 
-//void URE_Telegram::X_Button_OnClicked()
-//{
-//	RemoveFromParent();
-//}
+void URE_Telegram::HomeButton_ButtonOnClicked()
+{
+	if (!PhoneWidget)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("if(!PhoneWidget)"));
+		return;
+	}
+
+
+	PhoneWidget->GoHomeWidgetIndex();
+}
+
+void URE_Telegram::SetParentWidget(class URE_PhoneWidget* ParentWidget)
+{
+	PhoneWidget = ParentWidget;
+	
+}

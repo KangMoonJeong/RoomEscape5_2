@@ -113,13 +113,6 @@ class ROOMESCAPE_API URE_Telegram : public UUserWidget
 
 
 
-	/*UPROPERTY(meta = (BindWidget))
-	class UButton* X_Button;*/
-	
-	
-	//UFUNCTION()
-	//void X_Button_OnClicked();
-
 
 	UPROPERTY(EditAnywhere)
 	int32 Chapter_One;
@@ -170,5 +163,24 @@ class ROOMESCAPE_API URE_Telegram : public UUserWidget
 	void Password_EditableText_Two_Commit(const FText& InText, ETextCommit::Type InCommitType);
 	UFUNCTION()
 	void Password_EditableText_Three_Commit(const FText& InText, ETextCommit::Type InCommitType);
+
+
+
+
+	UPROPERTY(meta = (BindWidget))
+	class UButton* HomeButton;
+
+	UFUNCTION()
+	void HomeButton_ButtonOnClicked();
+
+	UPROPERTY(EditAnywhere)
+	int32 HomeWidgetIndex;
+
+	UPROPERTY()
+	class URE_PhoneWidget* PhoneWidget;
+
+public:
+	void SetParentWidget(class URE_PhoneWidget* ParentWidget);
+
 
 };
