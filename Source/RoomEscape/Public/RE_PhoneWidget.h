@@ -130,4 +130,24 @@ public:
 	UFUNCTION()
 	void GoHomeWidgetIndex();
 
+
+	void SetSolvedQuestNum(int32 SetItemNum, int32 SetChapterNum, int32 SetQuestNum, int32 SetLockNum);
+	void SetSolvedQuest();
+
+
+	UPROPERTY()
+	bool bSolvedPassword = false;
+
+	UPROPERTY()
+	int32 ItemNum = 0;
+
+	UPROPERTY()
+	int32 ChapterNum = 0;
+
+	UPROPERTY()
+	int32 QuestNum = 0;
+
+	UPROPERTY()
+	int32 LockNum = 0;
+
 };

@@ -3,6 +3,8 @@
 #include "Components\WidgetSwitcher.h"
 #include "RE_Telegram.h"
 #include "RoomEscape\RE_PlayerController.h"
+#include "RoomEscape\RE_GameInstance.h"
+
 
 bool URE_PhoneWidget::Initialize()
 {
@@ -42,18 +44,27 @@ void URE_PhoneWidget::YoungerPhone_ButtonOnClicked()
 {
 	PhoneWidgetSwitcher->SetActiveWidgetIndex(0);
 	CurrentPhoneIndex = 0;
+
+	if (bSolvedPassword)
+		SetSolvedQuest();
 }
 
 void URE_PhoneWidget::OlderPhone_ButtonOnClicked()
 {
 	PhoneWidgetSwitcher->SetActiveWidgetIndex(1);
 	CurrentPhoneIndex = 1;
+
+	if (bSolvedPassword)
+		SetSolvedQuest();
 }
 
 void URE_PhoneWidget::HusbandPhone_ButtonOnClicked()
 {
 	PhoneWidgetSwitcher->SetActiveWidgetIndex(2);
 	CurrentPhoneIndex = 2;
+
+	if (bSolvedPassword)
+		SetSolvedQuest();
 }
 
 
@@ -106,4 +117,34 @@ void URE_PhoneWidget::GoHomeWidgetIndex()
 		OlderSis_Switcher->SetActiveWidgetIndex(0);
 	else
 		Husband_Switcher->SetActiveWidgetIndex(0);
+}
+
+void URE_PhoneWidget::SetSolvedQuestNum(int32 SetItemNum, int32 SetChapterNum, int32 SetQuestNum, int32 SetLockNum)
+{
+
+	bSolvedPassword = true;
+
+	ItemNum = SetItemNum;
+
+	ChapterNum = SetChapterNum;
+
+	QuestNum = SetQuestNum;
+
+	LockNum = SetLockNum;
+}
+
+void URE_PhoneWidget::SetSolvedQuest()
+{
+	URE_GameInstance* GameInstance = Cast<URE_GameInstance>(GetWorld()->GetGameInstance());
+	if (GameInstance->CheckContainSolvedQuestMap(ItemNum))
+	{
+		return;
+	}
+	else
+	{
+		GameInstance->AddSolvedQuestMapElement(ItemNum);
+		GameInstance->GetUnLockedActorNum(ChapterNum, QuestNum, LockNum);
+	}
+
+	bSolvedPassword = false;
 }

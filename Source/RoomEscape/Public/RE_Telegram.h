@@ -183,4 +183,8 @@ public:
 	void SetParentWidget(class URE_PhoneWidget* ParentWidget);
 
 
+	
+
+
+
 };

@@ -49,17 +49,8 @@ void URE_Telegram::Password_EditableText_One_Commit(const FText& InText, ETextCo
 
 	if (UKismetTextLibrary::EqualEqual_TextText(Password_EditableText_One->GetText(), Password_One))
 	{
-		URE_GameInstance* GameInstance = Cast<URE_GameInstance>(GetWorld()->GetGameInstance());
-		//if (GameInstance->CheckContainSolvedQuestMap(ItemNum_One))
-		//{
-			ContentWidgetSwitcher->SetActiveWidgetIndex(2);
-		//}
-		//else
-		//{
-			ContentWidgetSwitcher->SetActiveWidgetIndex(2);
-			//GameInstance->AddSolvedQuestMapElement(ItemNum_One);
-			//GameInstance->GetUnLockedActorNum(Chapter_One, Quest_One, LockNum_One);
-		//}
+		ContentWidgetSwitcher->SetActiveWidgetIndex(2);
+
 	}
 	else
 	{
@@ -141,71 +132,6 @@ void URE_Telegram::Dialogue_Button_Three_ButtonOnClicked()
 }
 
 
-//void URE_Telegram::OK_Button_One_OnClicked()
-//{
-//	if (UKismetTextLibrary::EqualEqual_TextText(Password_EditableText_One->GetText(), Password_One))
-//	{
-//		URE_GameInstance* GameInstance = Cast<URE_GameInstance>(GetWorld()->GetGameInstance());
-//		if (GameInstance->CheckContainSolvedQuestMap(ItemNum_One))
-//		{
-//			ContentWidgetSwitcher->SetActiveWidgetIndex(2);
-//		}
-//		else
-//		{
-//			ContentWidgetSwitcher->SetActiveWidgetIndex(2);
-//			GameInstance->AddSolvedQuestMapElement(ItemNum_One);
-//			GameInstance->GetUnLockedActorNum(Chapter_One, Quest_One, LockNum_One);
-//		}
-//	}
-//	else
-//	{
-//		UE_LOG(LogTemp, Warning, TEXT("OK_Button_OnClicked() No"));
-//	}
-//}
-//
-//void URE_Telegram::OK_Button_Two_OnClicked()
-//{
-//	if (UKismetTextLibrary::EqualEqual_TextText(Password_EditableText_Two->GetText(), Password_Two))
-//	{
-//		URE_GameInstance* GameInstance = Cast<URE_GameInstance>(GetWorld()->GetGameInstance());
-//		if (GameInstance->CheckContainSolvedQuestMap(ItemNum_One))
-//		{
-//			ContentWidgetSwitcher->SetActiveWidgetIndex(4);
-//		}
-//		else
-//		{
-//			ContentWidgetSwitcher->SetActiveWidgetIndex(4);
-//			GameInstance->AddSolvedQuestMapElement(ItemNum_Two);
-//			GameInstance->GetUnLockedActorNum(Chapter_Two, Quest_Two, LockNum_Two);
-//		}
-//	}
-//	else
-//	{
-//		UE_LOG(LogTemp, Warning, TEXT("OK_Button_OnClicked() No"));
-//	}
-//}
-//
-//void URE_Telegram::OK_Button_Three_OnClicked()
-//{
-//	if (UKismetTextLibrary::EqualEqual_TextText(Password_EditableText_Three->GetText(), Password_Three))
-//	{
-//		URE_GameInstance* GameInstance = Cast<URE_GameInstance>(GetWorld()->GetGameInstance());
-//		if (GameInstance->CheckContainSolvedQuestMap(ItemNum_One))
-//		{
-//			ContentWidgetSwitcher->SetActiveWidgetIndex(6);
-//		}
-//		else
-//		{
-//			ContentWidgetSwitcher->SetActiveWidgetIndex(6);
-//			GameInstance->AddSolvedQuestMapElement(ItemNum_Three);
-//			GameInstance->GetUnLockedActorNum(Chapter_Three, Quest_Three, LockNum_Three);
-//		}
-//	}
-//	else
-//	{
-//		UE_LOG(LogTemp, Warning, TEXT("OK_Button_OnClicked() No"));
-//	}
-//}
 
 void URE_Telegram::Previousbutton_One_OnClicked()
 {
