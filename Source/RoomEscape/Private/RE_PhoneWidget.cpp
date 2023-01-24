@@ -135,6 +135,7 @@ void URE_PhoneWidget::SetSolvedQuestNum(int32 SetItemNum, int32 SetChapterNum, i
 
 void URE_PhoneWidget::SetSolvedQuest()
 {
+
 	URE_GameInstance* GameInstance = Cast<URE_GameInstance>(GetWorld()->GetGameInstance());
 	if (GameInstance->CheckContainSolvedQuestMap(ItemNum))
 	{
