@@ -181,5 +181,10 @@ public:
 
 
 	bool CheckContainSolvedQuestMap(int32 ItemNum);
+
+
+
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+	void SmoothLoadLevel(FName LevelName);
 	
 };
