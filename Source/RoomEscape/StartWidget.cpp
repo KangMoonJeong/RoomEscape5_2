@@ -4,7 +4,7 @@
 #include "RE_PlayerController.h"
 #include "SaveListWidget.h"
 #include "Kismet\KismetSystemLibrary.h"
-
+#include "RoomEscape\RE_GameInstance.h"
 
 bool UStartWidget::Initialize()
 {
@@ -31,9 +31,11 @@ void  UStartWidget::NewGameOnClicked()
 	if (RE_PlayerController)
 		RE_PlayerController->DeleteGameData();
 	
+	URE_GameInstance* GameInstance = Cast<URE_GameInstance>(GetWorld()->GetGameInstance());
+	GameInstance->SmoothLoadLevel(MapName);
 
 	this->RemoveFromViewport();
-	UGameplayStatics::OpenLevel(GetWorld(), MapName, true);
+	//UGameplayStatics::OpenLevel(GetWorld(), MapName, true);
 }
 
 

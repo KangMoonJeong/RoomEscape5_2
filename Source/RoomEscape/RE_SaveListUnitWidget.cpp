@@ -65,6 +65,7 @@ void URE_SaveListUnitWidget::SaveToSlot()
 void URE_SaveListUnitWidget::LoadToSlot()
 {
 	SaveSelectedSlotIndex(SlotIndex);
+	
 
 	UGameplayStatics::OpenLevel(GetWorld(), MapName, true);
 }

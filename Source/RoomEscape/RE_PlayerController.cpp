@@ -134,8 +134,8 @@ void ARE_PlayerController::OpenAlchemistsHouseWidget()
 		SetInputmodeandCursor(EInputMode::EIM_GameOnly);
 
 	}
-	FString Temp = "stat fps";
-	ConsoleCommand(Temp);
+	//FString Temp = "stat fps";
+	//ConsoleCommand(Temp);
 }
 
 void ARE_PlayerController::OnCurrentWidgetOffHUD(UUserWidget* OnCurrentWidget, EInputMode EStatus)

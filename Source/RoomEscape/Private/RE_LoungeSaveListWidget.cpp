@@ -27,15 +27,3 @@ void URE_LoungeSaveListWidget::SetSaveListUnitWidgetIndex(int32 Set)
 	//FString Temp = "HighResShot";
 	//GetOwningPlayer()->ConsoleCommand(Temp);
 }
-
-
-
-
-
-
-/* X_Button On Clicked Remove From Parent */
-//void URE_LoungeSaveListWidget::X_ButtonOnClicked()
-//{
-//	RemoveFromParent();
-//
-//}

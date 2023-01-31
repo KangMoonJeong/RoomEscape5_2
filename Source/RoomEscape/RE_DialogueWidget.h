@@ -81,6 +81,7 @@ protected:
 public:
 	int32 GetLoveCount();
 	void InitializeData(int32 SetResultLoveCount);
+	UPROPERTY(EditAnywhere)
 	int32 LoveCount;
 
 

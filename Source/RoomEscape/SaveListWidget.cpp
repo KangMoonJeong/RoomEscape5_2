@@ -25,9 +25,6 @@ void USaveListWidget::SetSaveListUnitWidgetIndex(int32 Set)
 	SaveListUnitWidget_4->SetActiveWidgetIndex(Set);
 	SaveListUnitWidget_5->SetActiveWidgetIndex(Set);
 	SaveListUnitWidget_6->SetActiveWidgetIndex(Set);
-
-	FString Temp = "HighResShot";
-	GetOwningPlayer()->ConsoleCommand(Temp);
 }
 
 
