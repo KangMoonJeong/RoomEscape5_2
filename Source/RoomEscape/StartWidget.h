@@ -53,4 +53,33 @@ protected:
 
 	UFUNCTION()
 	void Exit_ButtonOnClicked();
+
+
+
+
+
+
+
+	UPROPERTY(meta = (BindWidget),BlueprintReadWrite)
+	class UComboBoxString* Local_ComboBox;
+
+	UFUNCTION(BlueprintCallable)
+	void InitialLocalComboBox();
+
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString LocalString;
+
+	UFUNCTION(BlueprintCallable)
+	void SaveLocalString();
+
+	UFUNCTION(BlueprintCallable)
+	void SetLocalString(FString SetLocalString);
+
+	void LoadLocalStringFromSaveGame();
+
+	UFUNCTION(BlueprintCallable)
+	void SaveLocalStringToSaveGame();
+
 };

@@ -126,4 +126,11 @@ public:
 	int32 LoveCount;
 
 	class URE_DialogueWidget* DialogueWidget;
+
+
+	UPROPERTY()
+	FString LocalString;
+	void SetLocalString(FString SetLocalString);
+
+	FString GetLocalString();
 };

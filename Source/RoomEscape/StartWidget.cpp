@@ -5,6 +5,10 @@
 #include "SaveListWidget.h"
 #include "Kismet\KismetSystemLibrary.h"
 #include "RoomEscape\RE_GameInstance.h"
+#include"Components\ComboBoxString.h"
+#include "RE_WidgetSaveGame.h"
+#include "Kismet\KismetInternationalizationLibrary.h"
+
 
 bool UStartWidget::Initialize()
 {
@@ -19,7 +23,6 @@ bool UStartWidget::Initialize()
 
 	return true;
 }
-
 
 
 
@@ -56,6 +59,71 @@ void UStartWidget::LoadOnClicked()
 void UStartWidget::Exit_ButtonOnClicked()
 {
 	UKismetSystemLibrary::QuitGame(GetWorld(), UUserWidget::GetOwningPlayer(), EQuitPreference::Quit, false);
+}
+
+
+
+
+
+void UStartWidget::InitialLocalComboBox()
+{
+	LoadLocalStringFromSaveGame();
+	
+	if (LocalString == FString("None"))
+	{
+		Local_ComboBox->SetSelectedOption("en");
+		UKismetInternationalizationLibrary::SetCurrentCulture("en");
+	}
+	else
+	{
+		Local_ComboBox->SetSelectedOption(LocalString);
+		UKismetInternationalizationLibrary::SetCurrentCulture(LocalString);
+	}
+}
+
+
+
+void UStartWidget::SaveLocalString()
+{
+	ARE_PlayerController* RE_PlayerController = Cast<ARE_PlayerController>(GetWorld()->GetFirstPlayerController());
+	if (!RE_PlayerController)
+		return;
+	
+	RE_PlayerController->SetLocalString(LocalString);
+}
+
+void UStartWidget::SetLocalString(FString SetLocalString)
+{
+	LocalString = SetLocalString;
+}
+
+void UStartWidget::LoadLocalStringFromSaveGame()
+{
+	URE_WidgetSaveGame* SaveGame = Cast<URE_WidgetSaveGame>(UGameplayStatics::CreateSaveGameObject(URE_WidgetSaveGame::StaticClass()));
+
+	// 게임 데이터 세이브나 로드시
+	if (!UGameplayStatics::DoesSaveGameExist("MasterSlot", 0))
+		return;
+	
+	SaveGame = Cast<URE_WidgetSaveGame>(UGameplayStatics::LoadGameFromSlot("MasterSlot", 0));
+
+	if (!SaveGame);
+		return;
+
+	LocalString = SaveGame->LocalString;
+}
+
+void UStartWidget::SaveLocalStringToSaveGame()
+{
+	URE_WidgetSaveGame* SaveGame = Cast<URE_WidgetSaveGame>(UGameplayStatics::CreateSaveGameObject(URE_WidgetSaveGame::StaticClass()));
+
+	// 게임 데이터 세이브나 로드시
+	if (UGameplayStatics::DoesSaveGameExist("MasterSlot", 0))
+	{
+		SaveGame = Cast<URE_WidgetSaveGame>(UGameplayStatics::LoadGameFromSlot("MasterSlot", 0));
+	}
+
+	SaveGame->LocalString = LocalString;
 }
 
 

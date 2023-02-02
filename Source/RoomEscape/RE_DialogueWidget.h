@@ -41,7 +41,7 @@ private:
 	int32 CurrentRowNum = 1;
 
 public:
-	void InitializeProperties(FString FileName, int32 SetLoveCount = 10, bool SetLastIndex = false);
+	void InitializeProperties(FString FileName, int32 SetLoveCount = 0, bool SetLastIndex = false);
 	
 
 

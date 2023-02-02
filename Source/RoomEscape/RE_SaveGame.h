@@ -56,6 +56,4 @@ public:
 
 	UPROPERTY()
 	int32 LoveCount;
-
-
 };

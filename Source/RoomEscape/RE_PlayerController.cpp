@@ -309,7 +309,7 @@ void ARE_PlayerController::SaveGameData()
 	SaveGame->SolvedQuestMap = RE_GameInstance->GetSolvedQuestMap();
 	SaveGame->LoveCount = RE_GameInstance->GetLoveCount();
 
-	UE_LOG(LogTemp, Warning, TEXT("ARE_PlayerController:: SaveGame->LoveCount : %d"), SaveGame->LoveCount);
+	UE_LOG(LogTemp, Warning, TEXT("ARE_PlayerController:: SaveGame->SlotArray[SelectedIndex] : %d"), SelectedIndex);
 	UE_LOG(LogTemp, Warning, TEXT("ARE_PlayerController:: RE_GameInstance->LoveCount : %d"), RE_GameInstance->GetLoveCount());
 
 	
@@ -331,5 +331,17 @@ void ARE_PlayerController::DeleteGameData()
 			UGameplayStatics::DeleteGameInSlot(SaveGame->SlotArray[i], 0);
 		}
 	}
+}
+
+void ARE_PlayerController::SetLocalString(FString SetLocalString)
+{
+	LocalString = SetLocalString;
+
+	//SaveGame->LocalString = LocalString;
+}
+
+FString ARE_PlayerController::GetLocalString()
+{
+	return FString();
 }
 
