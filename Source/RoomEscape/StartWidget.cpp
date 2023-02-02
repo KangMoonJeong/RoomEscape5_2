@@ -100,13 +100,10 @@ void UStartWidget::SetLocalString(FString SetLocalString)
 void UStartWidget::LoadLocalStringFromSaveGame()
 {
 	URE_WidgetSaveGame* SaveGame = Cast<URE_WidgetSaveGame>(UGameplayStatics::CreateSaveGameObject(URE_WidgetSaveGame::StaticClass()));
-
-	// 게임 데이터 세이브나 로드시
 	if (!UGameplayStatics::DoesSaveGameExist("MasterSlot", 0))
 		return;
 	
 	SaveGame = Cast<URE_WidgetSaveGame>(UGameplayStatics::LoadGameFromSlot("MasterSlot", 0));
-
 	if (!SaveGame);
 		return;
 
@@ -116,12 +113,12 @@ void UStartWidget::LoadLocalStringFromSaveGame()
 void UStartWidget::SaveLocalStringToSaveGame()
 {
 	URE_WidgetSaveGame* SaveGame = Cast<URE_WidgetSaveGame>(UGameplayStatics::CreateSaveGameObject(URE_WidgetSaveGame::StaticClass()));
-
-	// 게임 데이터 세이브나 로드시
-	if (UGameplayStatics::DoesSaveGameExist("MasterSlot", 0))
-	{
-		SaveGame = Cast<URE_WidgetSaveGame>(UGameplayStatics::LoadGameFromSlot("MasterSlot", 0));
-	}
+	if (!UGameplayStatics::DoesSaveGameExist("MasterSlot", 0))
+		return;
+	
+	SaveGame = Cast<URE_WidgetSaveGame>(UGameplayStatics::LoadGameFromSlot("MasterSlot", 0));
+	if (!SaveGame)
+		return;
 
 	SaveGame->LocalString = LocalString;
 }
