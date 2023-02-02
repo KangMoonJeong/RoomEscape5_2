@@ -8,6 +8,7 @@
 #include"Components\ComboBoxString.h"
 #include "RE_WidgetSaveGame.h"
 #include "Kismet\KismetInternationalizationLibrary.h"
+#include "Kismet\KismetSystemLibrary.h"
 
 
 bool UStartWidget::Initialize()
@@ -71,11 +72,15 @@ void UStartWidget::InitialLocalComboBox()
 	
 	if (LocalString == FString("None"))
 	{
+		UKismetSystemLibrary::PrintString(GetWorld(), TEXT("if (LocalString == FString(None))"));
+
 		Local_ComboBox->SetSelectedOption("en");
 		UKismetInternationalizationLibrary::SetCurrentCulture("en");
 	}
 	else
 	{
+		UKismetSystemLibrary::PrintString(GetWorld(), TEXT("!!!!!!!!!if (LocalString == FString(None))"));
+
 		Local_ComboBox->SetSelectedOption(LocalString);
 		UKismetInternationalizationLibrary::SetCurrentCulture(LocalString);
 	}
@@ -99,28 +104,40 @@ void UStartWidget::SetLocalString(FString SetLocalString)
 
 void UStartWidget::LoadLocalStringFromSaveGame()
 {
-	URE_WidgetSaveGame* SaveGame = Cast<URE_WidgetSaveGame>(UGameplayStatics::CreateSaveGameObject(URE_WidgetSaveGame::StaticClass()));
-	if (!UGameplayStatics::DoesSaveGameExist("MasterSlot", 0))
-		return;
-	
-	SaveGame = Cast<URE_WidgetSaveGame>(UGameplayStatics::LoadGameFromSlot("MasterSlot", 0));
-	if (!SaveGame);
-		return;
-
-	LocalString = SaveGame->LocalString;
+	//URE_WidgetSaveGame* SaveGame = Cast<URE_WidgetSaveGame>(UGameplayStatics::CreateSaveGameObject(URE_WidgetSaveGame::StaticClass()));
+	//if (UGameplayStatics::DoesSaveGameExist("MasterSlot", 0))
+	//{
+	//	SaveGame = Cast<URE_WidgetSaveGame>(UGameplayStatics::LoadGameFromSlot("MasterSlot", 0));
+	//	//LocalString = SaveGame->LocalString;
+	//}
 }
 
 void UStartWidget::SaveLocalStringToSaveGame()
 {
 	URE_WidgetSaveGame* SaveGame = Cast<URE_WidgetSaveGame>(UGameplayStatics::CreateSaveGameObject(URE_WidgetSaveGame::StaticClass()));
-	if (!UGameplayStatics::DoesSaveGameExist("MasterSlot", 0))
-		return;
-	
-	SaveGame = Cast<URE_WidgetSaveGame>(UGameplayStatics::LoadGameFromSlot("MasterSlot", 0));
-	if (!SaveGame)
-		return;
 
+	//UKismetSystemLibrary::PrintString(GetWorld(), "if (UGameplayStatics::DoesSaveGameExist(MasterSlot, 0))");
+	SaveGame = Cast<URE_WidgetSaveGame>(UGameplayStatics::LoadGameFromSlot("MasterSlot", 0));
 	SaveGame->LocalString = LocalString;
+
+	UGameplayStatics::SaveGameToSlot(SaveGame, "MasterSlot", 0);
+
+	//if (UGameplayStatics::DoesSaveGameExist("MasterSlot", 0))
+	//{
+	//	UKismetSystemLibrary::PrintString(GetWorld(), "if (UGameplayStatics::DoesSaveGameExist(MasterSlot, 0))");
+	//	SaveGame = Cast<URE_WidgetSaveGame>(UGameplayStatics::LoadGameFromSlot("MasterSlot", 0));
+	////	SaveGame->LocalString = LocalString;
+	//}
+	//else
+	//{
+	//	UKismetSystemLibrary::PrintString(GetWorld(), "!!!!!!!!!!! if (UGameplayStatics::DoesSaveGameExist(MasterSlot, 0))");
+
+	//}
+
+	//SaveGame->LocalString = LocalString;
+
+	//UGameplayStatics::SaveGameToSlot(SaveGame, "MasterSlot", 0);
+
 }
 
 
