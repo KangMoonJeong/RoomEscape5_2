@@ -4,6 +4,9 @@
 #include "RE_PlayerController.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet\KismetSystemLibrary.h"
+#include "RE_WidgetSaveGame.h"
+
+
 
 
 bool URE_LoungeWidget::Initialize()
@@ -83,5 +86,20 @@ void URE_LoungeWidget::ExitNo_ButtonOnClicked()
 void URE_LoungeWidget::StorageNo_ButtonOnClicked()
 {
 	DetailContent_Switcher->SetActiveWidgetIndex(SettingWidgetIndex);
+
+}
+
+void URE_LoungeWidget::SetLocalString(FString SetLocalString)
+{
+	LocalString = SetLocalString;
+}
+
+void URE_LoungeWidget::SaveLocalStringToSaveGame()
+{
+	URE_WidgetSaveGame* SaveGame = Cast<URE_WidgetSaveGame>(UGameplayStatics::CreateSaveGameObject(URE_WidgetSaveGame::StaticClass()));
+
+	SaveGame->LocalString = LocalString;
+
+	UGameplayStatics::SaveGameToSlot(SaveGame, "MasterSlot2", 0);
 
 }

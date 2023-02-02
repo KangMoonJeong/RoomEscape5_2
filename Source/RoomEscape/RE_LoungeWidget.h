@@ -88,4 +88,24 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "707")
 	int32 ExitWidgetIndex;
+
+
+
+
+
+
+	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
+	class UComboBoxString* Local_ComboBox;
+
+
+	UFUNCTION(BlueprintCallable)
+	void SetLocalString(FString SetLocalString);
+
+
+	UFUNCTION(BlueprintCallable)
+	void SaveLocalStringToSaveGame();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString LocalString;
+
 };
