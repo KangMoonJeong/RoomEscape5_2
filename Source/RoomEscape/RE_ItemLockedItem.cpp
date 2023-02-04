@@ -100,7 +100,12 @@ void ARE_ItemLockedItem::Interact()
 	SelectTenLimitIndex = Character->GetPressedItemSlotLocation();
 
 	if (GetItemNum == LockedItemNum)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("1111 TimeLine.Play();"))
 		TimeLine.Play();
+		UE_LOG(LogTemp, Warning, TEXT("2222 TimeLine.Play();"))
+
+	}
 }
 
 
