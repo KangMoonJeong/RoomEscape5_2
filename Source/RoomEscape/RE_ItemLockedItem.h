@@ -110,6 +110,7 @@ protected:
 
 	/* Save Solved Status */
 public:
+	UFUNCTION()
 	void SolevedItem() override;
 
 

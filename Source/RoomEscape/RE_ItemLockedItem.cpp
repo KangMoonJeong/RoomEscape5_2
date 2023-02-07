@@ -37,6 +37,7 @@ ARE_ItemLockedItem::ARE_ItemLockedItem()
 
 	FOnTimelineEvent TimelineFinishEvent; 
 	TimelineFinishEvent.BindUFunction(this, "TimeLineFinish");
+	
 
 	
 	const ConstructorHelpers::FObjectFinder<UCurveFloat> RightDoor_Curve(TEXT("CurveFloat'/Game/707/Door/LeftDoor_Curve.LeftDoor_Curve'"));
@@ -46,6 +47,7 @@ ARE_ItemLockedItem::ARE_ItemLockedItem()
 	TimeLine.AddInterpFloat(LeftDoor_Curve.Object, progressFunction_Left, FName{ TEXT("LEFT_Door") });
 	TimeLine.AddInterpFloat(RightDoor_Curve.Object, progressFunction_Right, FName{ TEXT("RIGHT_Door") });
 	TimeLine.SetTimelineFinishedFunc(TimelineFinishEvent);
+
 
 }
 
@@ -101,10 +103,7 @@ void ARE_ItemLockedItem::Interact()
 
 	if (GetItemNum == LockedItemNum)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("1111 TimeLine.Play();"))
 		TimeLine.Play();
-		UE_LOG(LogTemp, Warning, TEXT("2222 TimeLine.Play();"))
-
 	}
 }
 
@@ -127,10 +126,12 @@ void ARE_ItemLockedItem::LeftDoorRotation(float Value)
 			RightDoor->SetRelativeRotation(FRotator(0, Value, 0)); // 180
 		}
 	}
+	
 }
 
 void ARE_ItemLockedItem::RightDoorRotation(float Value)
 {
+
 	if (bLeft)
 	{
 		if (bSlide)
@@ -197,4 +198,8 @@ int32 ARE_ItemLockedItem::GetItemNum()
 {
 	return ItemNum;
 }
+
+
+
+
 

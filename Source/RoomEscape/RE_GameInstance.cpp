@@ -240,6 +240,9 @@ int32 URE_GameInstance::GetTenLimitItemSlotArrayNum()
 
 int32 URE_GameInstance::GetSelectedItemSlotNum(int32 SelectedIndex)
 {
+	if (!TenLimitItemSlotArray.IsValidIndex(SelectedIndex))
+		return -1;
+
 	if (TenLimitItemSlotArray[SelectedIndex]->GetItemNum())
 	{
 		UE_LOG(LogTemp, Warning, TEXT("TenLimitItemSlotArray[SelectedIndex]->GetItemNum() : %d"), TenLimitItemSlotArray[SelectedIndex]->GetItemNum())
