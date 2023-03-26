@@ -134,4 +134,11 @@ public:
 	UPROPERTY(EditAnywhere)
 	bool bRight;
 
+
+	void SetDoorRotation(float DeltaTime);
+	bool CanRotation = false;
+	float CurrntLeftRotation = 0.f;
+	float CurrntRightRotation = 180.f;
+
+	void SolvedQuest();
 };

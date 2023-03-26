@@ -63,8 +63,11 @@ void ARE_ItemLockedItem::Tick(float DeltaTime)
 {
 	AActor::Tick(DeltaTime);
 
-	if (TimeLine.IsPlaying())
-		TimeLine.TickTimeline(DeltaTime);
+	/*if (TimeLine.IsPlaying())
+		TimeLine.TickTimeline(DeltaTime);*/
+
+	if (CanRotation)
+		SetDoorRotation(DeltaTime);
 
 }
 
@@ -101,9 +104,12 @@ void ARE_ItemLockedItem::Interact()
 	int32 GetItemNum = Character->GetPressedItemSlotItemNum();
 	SelectTenLimitIndex = Character->GetPressedItemSlotLocation();
 
+
 	if (GetItemNum == LockedItemNum)
 	{
-		TimeLine.Play();
+		CanRotation = true;
+		SolvedQuest();
+		//TimeLine.Play();
 	}
 }
 
@@ -197,6 +203,74 @@ void ARE_ItemLockedItem::SolevedItem()
 int32 ARE_ItemLockedItem::GetItemNum()
 {
 	return ItemNum;
+}
+
+void ARE_ItemLockedItem::SetDoorRotation(float DeltaTime)
+{
+	float RotaionSpeed = 85.f;
+	
+	if (bLeft)
+	{
+		CurrntLeftRotation = CurrntLeftRotation + (DeltaTime * RotaionSpeed);
+		if (CurrntLeftRotation >= 140)
+		{
+			/*CanRotation = false;
+			TimeLineFinish();*/
+			SetActorTickEnabled(false);
+			return;
+		}
+
+		if (bSlide)
+		{
+			LeftDoor->SetRelativeLocation(FVector(CurrntLeftRotation, 0, 0));
+		}
+		else
+		{
+			LeftDoor->SetRelativeRotation(FRotator(0, CurrntLeftRotation, 0)); // 0
+		}
+	}
+
+	if (bRight)
+	{
+		CurrntRightRotation = CurrntRightRotation - (DeltaTime* RotaionSpeed);
+		if (CurrntRightRotation <= 40)
+		{
+			/*CanRotation = false;
+			TimeLineFinish();*/
+			SetActorTickEnabled(false);
+			return;
+		}
+
+		if (bSlide)
+		{
+			RightDoor->SetRelativeLocation(FVector(CurrntRightRotation, 0, 0));
+		}
+		else
+		{
+			RightDoor->SetRelativeRotation(FRotator(0, CurrntRightRotation, 0)); // 180
+		}
+	}
+
+}
+
+void ARE_ItemLockedItem::SolvedQuest()
+{
+	
+	bEverSolveLock = true;
+
+
+	URE_GameInstance* GameInstance = Cast<URE_GameInstance>(GetWorld()->GetGameInstance());
+	if (!GameInstance)
+		return;
+
+	GameInstance->AddSolvedQuestMapElement(ItemNum);
+
+	GameInstance->GetUnLockedActorNum(Chapter, Quest, LockNum);
+	GameInstance->DeleteTenLimitArrayElementByIndex(SelectTenLimitIndex);
+	GameInstance->DeleteNoLimitArrayElementByIndex(SelectTenLimitIndex);
+
+	ARE_PlayerController* Controller = Cast<ARE_PlayerController>(GetWorld()->GetFirstPlayerController());
+	Controller->GetHUDInitializeSlotBar();
 }
 
 
