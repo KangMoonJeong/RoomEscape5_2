@@ -332,6 +332,8 @@ bool URE_GameInstance::SetTenLimitItemSlotArrayElement(int32 SetItemNum)
 	FString TexturePath = ItemSlotTexureSoftObjectPath[SetItemNum].GetAssetPathString();
 	UTexture2D* Texture = LoadObject<UTexture2D>(this, *TexturePath);
 
+	UE_LOG(LogTemp, Warning, TEXT("FString TexturePath : %s"), *TexturePath);
+
 	ItemSlot->SetItemSlotProperties(Texture, TenLimitItemSlotArray.Num(), SetItemNum);
 	TenLimitItemSlotArray.Add(ItemSlot);
 
